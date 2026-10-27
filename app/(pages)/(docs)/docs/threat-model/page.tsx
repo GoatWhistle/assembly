@@ -68,7 +68,7 @@ const VERDICT_COLUMNS: readonly TableColumn[] = [
   { key: "meaning", title: "What it means", kind: "muted", stack: "bare" },
 ]
 
-const WITNESS_PROBE = "npx tsx scripts/report/probe-witness.ts"
+const WITNESS_PROBE = "npx tsx tools/scripts/report/probe-witness.ts"
 
 function sentence(text: string): string {
   return `${text.charAt(0).toUpperCase()}${text.slice(1)}.`

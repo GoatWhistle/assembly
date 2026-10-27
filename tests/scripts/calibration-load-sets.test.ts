@@ -1,8 +1,8 @@
 import { existsSync, mkdirSync, rmSync, writeFileSync } from "node:fs"
 import { afterEach, describe, expect, it } from "vitest"
-import { loadSets } from "../../scripts/measure/analyse-calibration"
+import { loadSets } from "../../tools/scripts/measure/analyse-calibration"
 
-const SET_DIR = "eval/__calibration_control__"
+const SET_DIR = "tools/eval/__calibration_control__"
 
 afterEach(() => {
   if (existsSync(SET_DIR)) {
@@ -13,7 +13,7 @@ afterEach(() => {
 describe("loadSets never treats a corrupted result file as an absent one", () => {
   it("skips a set directory that genuinely does not exist", () => {
     expect(
-      loadSets(["eval/__does_not_exist__"]),
+      loadSets(["tools/eval/__does_not_exist__"]),
       "a set that was never measured must read as empty, not as an error",
     ).toEqual([])
   })

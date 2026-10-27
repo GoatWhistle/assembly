@@ -3,11 +3,11 @@ import { FieldName, policyFor } from "@/domain"
 import { BENCHMARK_ROWS } from "@/stats"
 import type { BenchmarkEntry } from "./benchmark-row"
 
-export const COVERAGE_MATRIX_SCRIPT = "npx tsx scripts/measure/coverage-matrix.ts"
-export const AB_GATE_SCRIPT = "npx tsx scripts/measure/ab-gate.ts"
-export const HELD_OUT_EER_SCRIPT = "npx tsx scripts/eer/report.ts eval/heldout"
+export const COVERAGE_MATRIX_SCRIPT = "npx tsx tools/scripts/measure/coverage-matrix.ts"
+export const AB_GATE_SCRIPT = "npx tsx tools/scripts/measure/ab-gate.ts"
+export const HELD_OUT_EER_SCRIPT = "npx tsx tools/scripts/eer/report.ts tools/eval/heldout"
 export const HELD_OUT_STRATA_SCRIPT =
-  "npx tsx scripts/measure/analyse-rarity.ts --set eval/heldout --strata 3"
+  "npx tsx tools/scripts/measure/analyse-rarity.ts --set tools/eval/heldout --strata 3"
 export const HELD_OUT_RUN = "make eval-heldout"
 export const HELD_OUT_MEASURED_ON = "2026-09-16"
 export const HELD_OUT_SIZE = 60
@@ -25,7 +25,7 @@ export const READ_BACK_COST = Object.freeze({
   contrastiveSeconds: "11.8 s",
   extraSeconds: "9.4 s",
   wordsPerSecond: "2.43 words",
-  rateSet: "eval/control",
+  rateSet: "tools/eval/control",
   command: COVERAGE_MATRIX_SCRIPT,
 })
 
@@ -86,7 +86,7 @@ function heldOutEntry(
     id: `heldout-${id}`,
     row: { figure, value, input: "tts", command, n, measuredOn: HELD_OUT_MEASURED_ON },
     meaning,
-    setDescription: `eval/heldout, recorded by ${HELD_OUT_RUN}`,
+    setDescription: `tools/eval/heldout, recorded by ${HELD_OUT_RUN}`,
     tone: "neutral",
   }
 }

@@ -61,7 +61,7 @@ describe("a pair hit is stated as a hypothesis, not as a finding against the cal
       LASA_STANCE.notClaim,
       "the re-ask is the cost side of the idea: questions land on values that were already correct, and the wording must not imply otherwise",
     ).toMatch(/59 correctly heard values, 21 still received it/)
-    expect(LASA_STANCE.notClaim).toContain("npx tsx scripts/measure/coverage-matrix.ts")
+    expect(LASA_STANCE.notClaim).toContain("npx tsx tools/scripts/measure/coverage-matrix.ts")
   })
 
   it("carries no accusing word in any wording a caller or judge reads", () => {

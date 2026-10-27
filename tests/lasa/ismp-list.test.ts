@@ -1,8 +1,8 @@
 import { readFileSync } from "node:fs"
 import { describe, expect, it } from "vitest"
 import { ISMP_PAIR_RECORDS, lasaRiskFor } from "@/lasa"
-import { baseName, pairsFromRows } from "../../scripts/build/lasa-pairs"
-import { parseIsmp } from "../../scripts/build/lasa-parse"
+import { baseName, pairsFromRows } from "../../tools/scripts/build/lasa-pairs"
+import { parseIsmp } from "../../tools/scripts/build/lasa-parse"
 
 const RAW = [
   "www.ismp.org | 3",

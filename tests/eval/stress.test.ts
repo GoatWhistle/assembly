@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest"
 import { seededRandom } from "@/stats/seeded-random"
-import { withNoise } from "../../scripts/build/stress-set"
-import { isPartnerSubstitution, tally } from "../../scripts/measure/analyse-stress"
+import { withNoise } from "../../tools/scripts/build/stress-set"
+import { isPartnerSubstitution, tally } from "../../tools/scripts/measure/analyse-stress"
 
 function row(spoken: string, heard: string, minConfidence: number) {
   return {

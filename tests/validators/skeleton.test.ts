@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest"
 import { catalogFromFile, neighbourFor } from "@/catalog"
 import { consonantSkeleton, skeletonNeighbours } from "@/validators"
-import fixture from "../../eval/fixtures/catalog-fixture.json"
+import fixture from "../../tools/eval/fixtures/catalog-fixture.json"
 
 const catalog = catalogFromFile(fixture as never)
 

@@ -23,9 +23,9 @@ import {
   REPORT_ACCOUNT_RUNS,
   STRESS_COMMAND,
 } from "@/features/metrics/session-runs"
-import { DISCARDED_RUNS } from "../../../scripts/report/live-run-count"
+import { DISCARDED_RUNS } from "../../../tools/scripts/report/live-run-count"
 
-const REPORT = readFileSync("eval/REPORT.md", "utf8")
+const REPORT = readFileSync("tools/eval/REPORT.md", "utf8")
 const SLOW = 180_000
 const run = promisify(execFile)
 const printed = new Map<string, string>()

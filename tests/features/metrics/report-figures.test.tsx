@@ -19,7 +19,7 @@ import {
   READ_BACK_COST,
 } from "@/features/metrics/report-figures"
 
-const REPORT = readFileSync("eval/REPORT.md", "utf8")
+const REPORT = readFileSync("tools/eval/REPORT.md", "utf8")
 const SLOW = 180_000
 const run = promisify(execFile)
 const printed = new Map<string, string>()
@@ -79,7 +79,7 @@ describe("every figure the docs add is the one its command prints and the report
       )
       expect(REPORT, value).toContain(value)
     }
-    const result = JSON.parse(readFileSync("eval/heldout/result-plain.json", "utf8")) as {
+    const result = JSON.parse(readFileSync("tools/eval/heldout/result-plain.json", "utf8")) as {
       readonly measuredAt: string
       readonly scored: readonly unknown[]
     }
@@ -148,7 +148,7 @@ describe("r1-A5-08: close codes read as observations, never as specification", (
 
   it("prints the command beside the session count", () => {
     const { container } = render(<OperationsPage />)
-    expect(container.textContent).toContain("npx tsx scripts/eer/report.ts eval/<set>")
+    expect(container.textContent).toContain("npx tsx tools/scripts/eer/report.ts eval/<set>")
     expect(container.textContent).toMatch(
       /npx tsx scripts\/report\/live-run-count\.ts\s*n = \d+, sessions of \d+ runs made before the spend ledger existed/,
     )

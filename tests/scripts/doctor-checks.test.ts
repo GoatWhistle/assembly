@@ -5,7 +5,7 @@ import {
   doctorExitCode,
   type FetchLike,
   runAllChecks,
-} from "../../scripts/report/doctor-checks"
+} from "../../tools/scripts/report/doctor-checks"
 
 function jsonFetch(status: number, body: string): FetchLike {
   return async () => new Response(body, { status })

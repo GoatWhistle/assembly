@@ -11,7 +11,7 @@ import {
   stressRun,
 } from "./session-runs"
 
-export const CLOSE_CODE_REPORT_COMMAND = "npx tsx scripts/eer/report.ts eval/<set>"
+export const CLOSE_CODE_REPORT_COMMAND = "npx tsx tools/scripts/eer/report.ts eval/<set>"
 
 export const VENDOR_DOCUMENTS_NONE =
   "AssemblyAI documents no WebSocket close codes at all: its streaming API reference lists none. Every meaning below is therefore an observation, and the source column says whose."

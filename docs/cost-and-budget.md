@@ -62,11 +62,11 @@ the per-instance rate brake, which is a different thing and is not a rate limit.
 function, closes a session that reaches its ceiling.
 
 **The 24 s spacing** comes from the 5-per-minute limit with margin, since each run opens a
-socket. `scripts/measure/measure-eer.ts`, `measure-live.ts` and `measure-units.ts` read
+socket. `tools/scripts/measure/measure-eer.ts`, `measure-live.ts` and `measure-units.ts` read
 `EER_SPACING_MS` with a default of 24000, and
-[`scripts/measure/measure-guard.ts`](../scripts/measure/measure-guard.ts) prints the spacing
+[`tools/scripts/measure/measure-guard.ts`](../tools/scripts/measure/measure-guard.ts) prints the spacing
 and the expected duration. At 1 s spacing, 21 of 40 sockets closed with 1008
-([`eval/REPORT.md`](../eval/REPORT.md), "Paid runs and spend").
+([`tools/eval/REPORT.md`](../tools/eval/REPORT.md), "Paid runs and spend").
 
 An account with no card attached has a hard ceiling at its credit: past it a forgotten tab
 stops the service instead of producing a bill. That is the account owner's choice, not
@@ -91,9 +91,9 @@ sockets and bill".
 | `make eval-control`, `make eval-native16` | **yes** | 40 sessions each, recognizer socket only |
 | `make eval-heldout` | **yes** | the sealed held-out set, 60 sessions, recognizer socket only |
 | `make eval-units` | **yes** | the unit set, 12 sessions, recognizer socket only |
-| `make eval-live`, `make eval-live-keyterms` | **yes** | the human voice set through the recognizer; `eval/live/manifest.json` lists 75 lines and 0 recordings, so there is nothing to send yet |
+| `make eval-live`, `make eval-live-keyterms` | **yes** | the human voice set through the recognizer; `tools/eval/live/manifest.json` lists 75 lines and 0 recordings, so there is nothing to send yet |
 | `make live-smoke` | **yes** | six scripted calls, both sockets; needs `LIVE_SMOKE_CONFIRM_PAID=1` and an https `LIVE_SMOKE_URL` |
-| `npx tsx scripts/report/probe-stt.ts`, `npx tsx scripts/report/probe-witness.ts` | **yes** | one probe session each, recorded in the ledger |
+| `npx tsx tools/scripts/report/probe-stt.ts`, `npx tsx tools/scripts/report/probe-witness.ts` | **yes** | one probe session each, recorded in the ledger |
 
 ## What does a forgotten tab pay for?
 
@@ -116,7 +116,7 @@ with 1000 ([`src/realtime/agent-client.ts`](../src/realtime/agent-client.ts),
 
 ## How is spend reported?
 
-`make spend` derives the total from [`eval/spend-ledger.json`](../eval/spend-ledger.json) at
+`make spend` derives the total from [`tools/eval/spend-ledger.json`](../tools/eval/spend-ledger.json) at
 the rates above, and prints no figure at all when no run is recorded, because a zero would be
 a number nobody measured. Every paying target above appends its run with its socket-open
 seconds, except `make eval-units`, whose runs only `make live-runs` counts.
@@ -133,7 +133,7 @@ prints it beside the derived total.
 
 The measurement scripts retry only the vendor codes `at_capacity`, `concurrency_exceeded` and
 `internal_error`, and network-level transport failures such as a reset connection or a
-timeout, with backoff of 5, 15 and 45 s ([`scripts/eer/retry.ts`](../scripts/eer/retry.ts)).
+timeout, with backoff of 5, 15 and 45 s ([`tools/scripts/eer/retry.ts`](../tools/scripts/eer/retry.ts)).
 Anything else is not transient, and a retry doubles the spend without fixing it.
 
 **Close code 1008 is the new-session limit, not a transport failure.** Reading it as a

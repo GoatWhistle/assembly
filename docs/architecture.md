@@ -231,9 +231,9 @@ graph TD
 
 | Rule | How it is enforced |
 |---|---|
-| The gate imports only `domain`, `validators`, `lasa`, `catalog` | `make import-cycles` (`GATE_ALLOWED` in `scripts/checks/import-cycles.sh`) |
+| The gate imports only `domain`, `validators`, `lasa`, `catalog` | `make import-cycles` (`GATE_ALLOWED` in `tools/scripts/checks/import-cycles.sh`) |
 | No import cycle anywhere, tests and scripts included; `@/`, `@app/` and relative imports are resolved | `make import-cycles` over `src`, `app`, `tests`, `scripts` |
-| The gate derives LASA risk from the value, not from a field the caller filled in | mutation `lasa_trusts_caller_field` in `scripts/checks/gate-mutations.txt` |
+| The gate derives LASA risk from the value, not from a field the caller filled in | mutation `lasa_trusts_caller_field` in `tools/scripts/checks/gate-mutations.txt` |
 | `ConfirmedValue` is built only in `src/gate/confirm.ts` | `make gate-invariant` |
 | A client tree imports no values from `@/catalog`, `@/sessions`, `@/tools`, `@/agent` | `make server-only`; type-only imports pass |
 | Shared code is cut by subject; no `utils`, `common`, `helpers`, `lib` | `make package-subject` |
@@ -268,8 +268,8 @@ rather than a copy of them.
 | `src/shared/ui/` | Primitives, data display, motion, navigation, states; the one allowed `shared` |
 | `src/styles/tokens/` | Palette, semantic, typography and motion tokens in OKLCH |
 | `data/` | Built artefacts: `catalog.json` (NDC) and `lasa-pairs.json` (ISMP) |
-| `eval/` | Corpora, fixtures, the sealed held-out set, live run records, the spend ledger, `REPORT.md` |
-| `scripts/` | Ratchet checks, corpus and data builds, measurements, reports, A/B arms, the live-smoke registry |
+| `tools/eval/` | Corpora, fixtures, the sealed held-out set, live run records, the spend ledger, `REPORT.md` |
+| `tools/scripts/` | Ratchet checks, corpus and data builds, measurements, reports, A/B arms, the live-smoke registry |
 | `tests/` | Mirrors `src/`, plus `e2e/` (Playwright, fake microphone) and `live/` (the paid smoke harness) |
 | `docs/` | This documentation |
 
@@ -375,7 +375,7 @@ agents older than 24 hours, left behind by sessions that never finalized, in bot
 it deletes nothing unless the script is run with `--apply`.
 
 `make agent` keeps one reference agent for `make doctor`, which checks that its content
-matches the source (`scripts/report/agent-drift.ts`) and that every tool URL answers.
+matches the source (`tools/scripts/report/agent-drift.ts`) and that every tool URL answers.
 
 ## How to run it locally
 
@@ -395,7 +395,7 @@ make dev
 
 `make data` downloads the NDC file from the FDA. It rebuilds the ISMP table only when the
 list's PDF has been downloaded to `artefacts/sources/ismp-confused-drug-names-2023.pdf`
-(git ignores that directory; a different path can be passed to `scripts/build/lasa.ts`),
+(git ignores that directory; a different path can be passed to `tools/scripts/build/lasa.ts`),
 and otherwise keeps the committed snapshot; a parse below the floor `MIN_PARSED_PAIRS`
 refuses to overwrite it. It ends by printing how many curated LASA names the catalogue matches.
 [Reference data](reference-data.md) describes both sources.

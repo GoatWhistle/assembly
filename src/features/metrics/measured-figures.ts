@@ -63,7 +63,7 @@ export function errorRateFigures(): readonly MetricDefinition[] {
     name: `Entity error rate, ${lowerFirst(run.name)}`,
     meaning: `How often the recognizer returned a different drug name than the one spoken. ${upperFirst(run.setDescription)}.`,
     command: run.command,
-    setDescription: `utterances in eval/${run.id}`,
+    setDescription: `utterances in tools/eval/${run.id}`,
     value: ratePercent(errors(run.scored).length, run.scored.length),
     input: "tts",
     n: run.scored.length,

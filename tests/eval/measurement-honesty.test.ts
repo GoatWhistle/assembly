@@ -2,7 +2,7 @@ import { execFileSync } from "node:child_process"
 import { readFileSync } from "node:fs"
 import { describe, expect, it } from "vitest"
 import { parseLedger } from "@/domain"
-import { resultFileName } from "../../scripts/measure/measure-eer"
+import { resultFileName } from "../../tools/scripts/measure/measure-eer"
 import {
   type ArtefactRun,
   artefactRuns,
@@ -10,7 +10,7 @@ import {
   honestCount,
   LEDGER_PATH,
   reconciliation,
-} from "../../scripts/report/live-run-count"
+} from "../../tools/scripts/report/live-run-count"
 
 function runScript(path: string): { code: number; output: string } {
   try {
@@ -42,7 +42,7 @@ describe("reproducibility is recorded rather than overwritten", () => {
   })
 
   it("refuses to overwrite a recorded run, and refuses before spending any credit", () => {
-    const source = readFileSync("scripts/measure/measure-eer.ts", "utf8")
+    const source = readFileSync("tools/scripts/measure/measure-eer.ts", "utf8")
     const guardAt = source.indexOf("already holds a recorded run")
     const keyAt = source.indexOf("const key = requireKey()")
     const socketAt = source.indexOf("await transcribeAll(")
@@ -60,8 +60,8 @@ describe("reproducibility is recorded rather than overwritten", () => {
     ).toBeLessThan(socketAt)
   })
 
-  it("states in eval/REPORT.md that reproducibility is not measured, rather than claiming agreement", () => {
-    const report = readFileSync("eval/REPORT.md", "utf8")
+  it("states in tools/eval/REPORT.md that reproducibility is not measured, rather than claiming agreement", () => {
+    const report = readFileSync("tools/eval/REPORT.md", "utf8")
     expect(
       report,
       "no set has been run twice, and the section must say so in words. A reproducibility section that goes quiet reads as a figure nobody objected to",
@@ -109,7 +109,7 @@ describe("the count of live runs includes the ones that failed", () => {
       total.sessionsWithUnknownDuration,
       "some runs have no socket clock on record, and pretending otherwise is what turns an estimate into a fabrication",
     ).toBeGreaterThan(0)
-    const result = runScript("scripts/report/live-run-count.ts")
+    const result = runScript("tools/scripts/report/live-run-count.ts")
     expect(result.code, "the published command must run and exit zero").toBe(0)
     expect(
       result.output,
@@ -139,8 +139,8 @@ describe("the count of live runs includes the ones that failed", () => {
 
   it("names an artefact that postdates the ledger's first entry instead of calling the sets disjoint", () => {
     const late: ArtefactRun = {
-      setPath: "eval/dev",
-      file: "eval/dev/late.json",
+      setPath: "tools/eval/dev",
+      file: "tools/eval/dev/late.json",
       measuredAt: "2026-09-26T00:00:00.000Z",
       sessions: 1,
       cleanCloses: 1,

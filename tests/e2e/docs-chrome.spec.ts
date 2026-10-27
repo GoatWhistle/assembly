@@ -109,7 +109,7 @@ test.describe("r2: the docs chrome", () => {
     await expect(table.getByRole("row", { name: /^1008/ })).toBeVisible()
     await expect(table.getByRole("row", { name: /^1006/ })).toBeVisible()
     await expect(
-      page.locator("section#close-codes").getByText("npx tsx scripts/report/live-run-count.ts"),
+      page.locator("section#close-codes").getByText("npx tsx tools/scripts/report/live-run-count.ts"),
     ).toBeVisible()
   })
 

@@ -90,7 +90,7 @@ export default function BenchmarkPage() {
             takes the minimum across the source words rather than the mean. It does not prove
             the pair rule, because low word confidence caught that error; the case the pair rule
             exists for rests on our own four above-threshold errors. Recorded in{" "}
-            <Code>eval/REPORT.md</Code>; we did not reproduce the run.
+            <Code>tools/eval/REPORT.md</Code>; we did not reproduce the run.
           </p>
         </Panel>
       </DocSection>

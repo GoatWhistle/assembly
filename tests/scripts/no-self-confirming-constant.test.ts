@@ -12,7 +12,7 @@ const RATE_LITERALS: readonly string[] = Object.values(RATE_USD_PER_HOUR).map((r
 )
 
 const PRICE_LITERAL_EXEMPT: Readonly<Record<string, string>> = Object.freeze({
-  "scripts/checks/contrast.mjs":
+  "tools/scripts/checks/contrast.mjs":
     "its 4.5 is the WCAG body-text contrast ratio, which happens to share a value with the agent socket rate and has nothing to do with money",
 })
 

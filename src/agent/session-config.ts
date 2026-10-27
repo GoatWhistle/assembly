@@ -4,7 +4,7 @@ import { GREETING, SYSTEM_PROMPT } from "./prompt"
 import { type AgentTool, buildTools } from "./tools"
 
 export const AGENT_MODEL_NOTE =
-  "the stored agent definition names no language model: the create-agent schema has no model field, a model we sent was accepted and ignored, and every session configuration showed llm: [], the vendor's managed model. This account has no access to the LLM Gateway models that could replace it. Measured 26 September 2026; see eval/REPORT.md"
+  "the stored agent definition names no language model: the create-agent schema has no model field, a model we sent was accepted and ignored, and every session configuration showed llm: [], the vendor's managed model. This account has no access to the LLM Gateway models that could replace it. Measured 26 September 2026; see tools/eval/REPORT.md"
 
 export type TurnDetection = {
   readonly vad_threshold: number

@@ -64,7 +64,7 @@ export function CloseCodeMethods({ scope }: { readonly scope: CloseCodeScope }) 
         <Method
           command={scope.beforeLedgerCommand}
           n={scope.beforeLedgerSessions}
-          set={`sessions of ${scope.beforeLedgerRuns} runs made before the spend ledger existed; ${scope.fromReportSessions} of them come from eval/REPORT.md's own account of two runs that left no file, which is weaker evidence`}
+          set={`sessions of ${scope.beforeLedgerRuns} runs made before the spend ledger existed; ${scope.fromReportSessions} of them come from tools/eval/REPORT.md's own account of two runs that left no file, which is weaker evidence`}
         />
       </li>
       <li>

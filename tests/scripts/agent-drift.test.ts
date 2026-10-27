@@ -5,7 +5,7 @@ import {
   checkAgentMatches,
   compareAgentToDefinition,
   definitionDigest,
-} from "../../scripts/report/agent-drift"
+} from "../../tools/scripts/report/agent-drift"
 
 const expected = buildAgentDefinition({
   baseUrl: "https://readback.example.com",

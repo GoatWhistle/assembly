@@ -6,7 +6,7 @@ import {
   vendorUserTranscripts,
   witnessOrderFields,
 } from "@/sessions"
-import recorded from "../../eval/fixtures/witness/timeline-recorded-shape.json"
+import recorded from "../../tools/eval/fixtures/witness/timeline-recorded-shape.json"
 
 const timeline = parseTimeline(recorded) as SessionTimeline
 

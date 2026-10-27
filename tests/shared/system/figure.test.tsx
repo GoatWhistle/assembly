@@ -13,7 +13,7 @@ describe("Figure", () => {
           unit="held-out set"
           value="26.7%"
           interval="[17.1%, 39.0%]"
-          method={{ command: "make eval-heldout", n: 60, set: "eval/heldout" }}
+          method={{ command: "make eval-heldout", n: 60, set: "tools/eval/heldout" }}
         />
       </FigureGroup>,
     )

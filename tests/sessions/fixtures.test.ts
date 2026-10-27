@@ -17,7 +17,7 @@ const NAMES = [
 
 function load(name: string): SessionFixture {
   return JSON.parse(
-    readFileSync(resolve(`eval/fixtures/${name}.json`), "utf8"),
+    readFileSync(resolve(`tools/eval/fixtures/${name}.json`), "utf8"),
   ) as SessionFixture
 }
 

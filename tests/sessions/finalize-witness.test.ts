@@ -8,7 +8,7 @@ import {
   type SessionStore,
   VENDOR_SESSIONS_URL,
 } from "@/sessions"
-import sessionRecord from "../../eval/fixtures/witness/session-record-shape.json"
+import sessionRecord from "../../tools/eval/fixtures/witness/session-record-shape.json"
 import { COMMITTED_INTAKE, commitHonestOrder } from "../api/committed-order"
 import { AGENT, resetToolEnvironment, SESSION } from "../api/harness"
 

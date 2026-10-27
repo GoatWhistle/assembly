@@ -31,9 +31,9 @@ The project overview is the [README](../README.md).
 | Page | What it answers |
 |---|---|
 | [Evidence](evidence.md) | Every claim graded from measured to false, with the command and set size behind each measured one and what that set cannot show |
-| [Evaluation report](../eval/REPORT.md) | Every measured figure beside its command, set size and interval: recognizer errors, what the gate asks and catches, checksums, latency, live runs, spend |
+| [Evaluation report](../tools/eval/REPORT.md) | Every measured figure beside its command, set size and interval: recognizer errors, what the gate asks and catches, checksums, latency, live runs, spend |
 | [Verification](verification.md) | What `make verify` runs, gate mutation testing, positive controls, figures reproduced offline by `make honest`, which commands bill, the live smoke harness |
-| [Human voice set](../eval/live/voice-set.md) | The recording script for the first human-spoken evaluation set and what each line tests; no recording exists yet |
+| [Human voice set](../tools/eval/live/voice-set.md) | The recording script for the first human-spoken evaluation set and what each line tests; no recording exists yet |
 | [Sources](sources.md) | Every outside rule and figure, quoted verbatim with its link, including the evidence that cuts against the product |
 
 ## What can it not prove, and what does it cost?

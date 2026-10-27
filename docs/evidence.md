@@ -8,7 +8,7 @@
 
 **Read this if** you want to know how much weight a number here can carry · **Related:**
 [limitations](limitations.md) · [design decisions](design-decisions.md) ·
-[sources](sources.md) · [eval/REPORT.md](../eval/REPORT.md)
+[sources](sources.md) · [tools/eval/REPORT.md](../tools/eval/REPORT.md)
 
 ---
 
@@ -32,7 +32,7 @@ weakest. When two grades are defensible, the lower one is used.
 | Claim | Status | Where |
 |---|---|---|
 | `ConfirmedValue` is unconstructible outside the gate | **Enforced** | `make gate-invariant` fails on a second type assertion in any of its three syntaxes, or on an `as unknown as` |
-| Each gate branch has a test that fails by name when the branch breaks | **Enforced** | `make gate-mutation`, 12 of 12 mutations killed; the expected count is read from `scripts/checks/gate-mutations.txt`, never from the run itself |
+| Each gate branch has a test that fails by name when the branch breaks | **Enforced** | `make gate-mutation`, 12 of 12 mutations killed; the expected count is read from `tools/scripts/checks/gate-mutations.txt`, never from the run itself |
 | A LASA hit re-asks at confidence 1.0 | **Enforced** | The pair rule is read before the threshold in `decide()`; the mutations `lasa_hit_ignored` and `lasa_gated_by_confidence` each fail a named test |
 | The key never reaches the browser | **Enforced** | `make secrets` fails if `ASSEMBLYAI_API_KEY` appears outside `app/api/`, or is absent from it |
 | A proposed value is supported by what was spoken | **Enforced** | The server reconciles the value against the words of its turn (`src/tools/apply-proposal.ts`); a mismatch is a validator failure, `spoken_support`, not a fourth reason |
@@ -40,7 +40,7 @@ weakest. When two grades are defensible, the lower one is used.
 | A word the recognizer never scored cannot pass as a scored one | **Enforced** | `makeProvenance` refuses a non-finite or out-of-range confidence, so `NaN < threshold` can never skip the low-confidence branch |
 | A spoken "yes" confirms only when bound to the words that were read back | **Enforced** in tests; **Observed** on production with a synthesised caller | [When does a spoken yes confirm?](#when-does-a-spoken-yes-confirm) |
 | Checksum behaviour on specific identifiers | **Enforced** | `AB1234563` passes, `BX1234567` fails (`tests/validators/dea.test.ts`); `1234567893` passes, `1234567890` fails (`tests/validators/npi.test.ts`) |
-| Entity Error Rate on our corpora | **Measured** | [eval/REPORT.md](../eval/REPORT.md), each figure with its command, set size and Wilson interval |
+| Entity Error Rate on our corpora | **Measured** | [tools/eval/REPORT.md](../tools/eval/REPORT.md), each figure with its command, set size and Wilson interval |
 | Which of the three mechanisms pays for which re-ask | **Measured** | Coverage matrix over 80 utterances: [below](#which-mechanism-pays-for-which-re-ask) |
 | What the shipped gate asks about correct values | **Measured** | 59 of 59 correct drug names are asked about: 25 by the standing read-back, 13 by the threshold, 21 by a contrastive question ([below](#what-does-the-shipped-gate-ask-about-correct-values)) |
 | What the pair rule adds over a plain read-back | **Measured** | Without the pair rule a reflex yes writes 20 of 20 pair mishearings; with it, 0 ([below](#what-does-the-pair-rule-add-over-a-plain-read-back)) |
@@ -81,7 +81,7 @@ a synthesised caller: the read-back was refused, not confirmed. No human voice h
 
 ## What has a live call shown?
 
-The production live runs are recorded in `eval/live/runs.json`. Every caller line is
+The production live runs are recorded in `tools/eval/live/runs.json`. Every caller line is
 synthesised speech injected into the page; no human voice has been through a live call.
 
 | Scenario | Outcome on production |
@@ -98,8 +98,8 @@ synthesised speech injected into the page; no human voice has been through a liv
 **The assumption:** the three reasons to re-ask are not interchangeable, and each catches what
 the others do not.
 
-**Measured with:** `npx tsx scripts/measure/coverage-matrix.ts`: the real validators and the
-real `decide()` over the 80 utterances of `eval/control` and `eval/native16`, each assigned to
+**Measured with:** `npx tsx tools/scripts/measure/coverage-matrix.ts`: the real validators and the
+real `decide()` over the 80 utterances of `tools/eval/control` and `tools/eval/native16`, each assigned to
 the **first** branch `decide()` takes, in the gate's own order.
 
 ```mermaid
@@ -130,7 +130,7 @@ did not".
 **The assumption:** the cost of the idea is the questions asked about values that were already
 right, and it has to be published next to the catches, or the metric is one-sided.
 
-**Measured with:** `npx tsx scripts/measure/coverage-matrix.ts`: the shipped `drug_name`
+**Measured with:** `npx tsx tools/scripts/measure/coverage-matrix.ts`: the shipped `drug_name`
 policy, pair rule on and every drug name read back by regulation.
 
 **At what n:** n=59 correct values, all asked about, because the Joint Commission read-back is
@@ -144,7 +144,7 @@ letter counted as a word, not a timing of the agent's voice.
 **What that n is not enough for.** The contrastive share belongs to this corpus, whose names
 were chosen before the measurement. On the held-out set, never used for tuning, the same rule
 asks **6 of 44** correct values, 13.6% [6.4%, 26.7%], and across the catalogue 13.5% of drugs
-carry a listed name (`npx tsx scripts/measure/ismp-coverage.ts`). None of these is weighted by
+carry a listed name (`npx tsx tools/scripts/measure/ismp-coverage.ts`). None of these is weighted by
 how often a drug is dispensed, and no dispensing-weighted rate is claimed.
 
 ## What does the pair rule add over a plain read-back?
@@ -153,7 +153,7 @@ how often a drug is dispensed, and no dispensing-weighted rate is claimed.
 rule has to add something a read-back does not: protection against a caller who hears the
 wrong name read back and says yes by reflex.
 
-**Measured with:** `npx tsx scripts/measure/ab-gate.ts`: 40 candidates, seed 20260916, through
+**Measured with:** `npx tsx tools/scripts/measure/ab-gate.ts`: 40 candidates, seed 20260916, through
 three arms of the real policy. A reflex yes writes whatever the threshold or the standing
 read-back asked about, and never what the pair rule asked about, because only a spoken name
 answers a contrastive question.
@@ -175,7 +175,7 @@ recognizer produces one confidently is a separate measurement, in the next secti
 model can be certain it heard one name when another was spoken.
 
 **Measured with:** the confidence AssemblyAI returns over the recorded corpora, and
-`npx tsx scripts/measure/analyse-stress.ts` over the degraded set.
+`npx tsx tools/scripts/measure/analyse-stress.ts` over the degraded set.
 
 **At what n:** 80 recordings in the coverage matrix; a held-out set of **60 recordings**,
 opened once; 188 degraded recordings (telephone band, noise at 10 and 5 dB, speed-up), of
@@ -186,7 +186,7 @@ than scored.
 control-set words (`vinorelbine` as `venorelbine`, `glycopyrronium` as `glycopyrrhonium`,
 each in two arms) sit **at or above 0.95**, and on the held-out set two genuine errors
 (`oteseconazole` heard as `otesiconazole` at 0.971, `chlorthalidone` as `chlorothalidone` at
-0.980) do too, as reported in [eval/REPORT.md](../eval/REPORT.md). A confidence check alone
+0.980) do too, as reported in [tools/eval/REPORT.md](../tools/eval/REPORT.md). A confidence check alone
 would have written them into the order. Each confident error is a non-word the catalogue
 refuses. **A confident substitution of one real listed drug for its partner has not been
 observed**: 0 of 186 scored degraded utterances, and no error at all at or above 0.95 in that
@@ -200,7 +200,7 @@ such claim is made.
 **The assumption:** a pair rule is only as good as the list behind it, so the whole published
 list is the rule, not a hand-picked subset.
 
-**Measured with:** `npx tsx scripts/measure/ismp-coverage.ts` over `data/lasa-pairs.json`,
+**Measured with:** `npx tsx tools/scripts/measure/ismp-coverage.ts` over `data/lasa-pairs.json`,
 parsed from the ISMP List of Confused Drug Names, updated through February 2023, with the page
 and row of each pair kept.
 
@@ -222,12 +222,12 @@ example, are on neither tier. A brand name is matched only through the catalogue
 
 **The assumption:** rare drug names are recognised markedly worse than common ones. The
 prediction, the decision rule and the falsification condition are recorded in
-[eval/heldout-preregistration.md](../eval/heldout-preregistration.md), written before the
+[tools/eval/heldout-preregistration.md](../tools/eval/heldout-preregistration.md), written before the
 held-out audio existed.
 
 **Measured with:** the held-out set in three strata by the number of combinations in the
 catalogue, Wilson intervals:
-`npx tsx scripts/measure/analyse-rarity.ts --set eval/heldout --strata 3`. The rule required
+`npx tsx tools/scripts/measure/analyse-rarity.ts --set tools/eval/heldout --strata 3`. The rule required
 **non-overlapping** intervals between `rare` and `common`.
 
 **At what n:** 60 recordings, 20 per stratum: `rare` 30.0% [14.5%, 51.9%], `mid` 30.0%
@@ -235,7 +235,7 @@ catalogue, Wilson intervals:
 
 **What that n is not enough for.** The hypothesis **is not supported**: the intervals overlap
 heavily, and `rare` and `mid` coincide exactly. The control corpus shows 43.8% against 16.7%
-on a two-way split of 40 (`npx tsx scripts/measure/analyse-rarity.ts --set eval/control`);
+on a two-way split of 40 (`npx tsx tools/scripts/measure/analyse-rarity.ts --set tools/eval/control`);
 that gap does not reproduce on the held-out set, and on the evidence it is sampling noise. At
 20 recordings per stratum the design cannot detect a difference smaller than roughly twenty
 percentage points, so the conclusion is **"not shown"**, not "no effect". The set is sealed
@@ -269,7 +269,7 @@ digits aloud, but the two checks are not equivalent and are never described as s
 **The assumption:** the detector should be pointed not only at incoming speech but at the
 catalogue that ships.
 
-**Measured with:** `npx tsx scripts/measure/audit-catalog.ts`: the consonant skeleton over the
+**Measured with:** `npx tsx tools/scripts/measure/audit-catalog.ts`: the consonant skeleton over the
 whole catalogue of 3730 prescription products.
 
 **At what n:** the entire shipped catalogue. **131 shared skeletons**: 71 are one name
@@ -285,14 +285,14 @@ confusion.
 
 **The assumption:** the gate's decision adds no noticeable delay to the conversation.
 
-**Measured with:** `npx tsx scripts/measure/latency-budget.ts`, which reads the recorded runs
+**Measured with:** `npx tsx tools/scripts/measure/latency-budget.ts`, which reads the recorded runs
 and times the gate's decision over the word spans of the synthesised fixtures, in Node, with no
 socket.
 
 **At what n:** the gate decision over 17 spans: 0 over the 5 ms budget, worst case well under
 a millisecond (a wall-clock timing, so the exact figure varies from run to run). Recognizer
 finalisation over 80 recorded utterances: 0 over the vendor's published 500 ms, worst case
-357 ms. [eval/REPORT.md](../eval/REPORT.md) reports finalisation P95 of 268 ms over 40 live
+357 ms. [tools/eval/REPORT.md](../tools/eval/REPORT.md) reports finalisation P95 of 268 ms over 40 live
 sessions from `make eval-control`, a paid run not reproduced here. The two are different
 metrics on different sets and are not interchangeable.
 
@@ -307,8 +307,8 @@ needs a live agent socket and stays not measured. So this is "the delay the gate
 
 **The assumption:** the recognizer's confidence can be read as a probability of being right.
 
-**Measured with:** calibration over 120 recorded utterances (`eval/control`, `eval/dev`,
-`eval/native16`): `npx tsx scripts/measure/analyse-calibration.ts`. Every confidence value
+**Measured with:** calibration over 120 recorded utterances (`tools/eval/control`, `tools/eval/dev`,
+`tools/eval/native16`): `npx tsx tools/scripts/measure/analyse-calibration.ts`. Every confidence value
 comes from AssemblyAI.
 
 **At what n:** 120 recordings; of the **83 at confidence 0.95 and above, 4 were misheard** (two

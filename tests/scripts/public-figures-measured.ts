@@ -7,10 +7,10 @@ import {
   percent,
 } from "./public-figure-anchor"
 
-const COVERAGE = "npx tsx scripts/measure/coverage-matrix.ts"
-const AB_GATE = "npx tsx scripts/measure/ab-gate.ts"
-const CHECKSUMS = "npx tsx scripts/measure/audit-checksums.ts 200"
-const ISMP = "npx tsx scripts/measure/ismp-coverage.ts"
+const COVERAGE = "npx tsx tools/scripts/measure/coverage-matrix.ts"
+const AB_GATE = "npx tsx tools/scripts/measure/ab-gate.ts"
+const CHECKSUMS = "npx tsx tools/scripts/measure/audit-checksums.ts 200"
+const ISMP = "npx tsx tools/scripts/measure/ismp-coverage.ts"
 
 const README: PublicDocument = "README.md"
 const EVIDENCE: PublicDocument = "docs/evidence.md"

@@ -7,7 +7,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 import { catalogFromFile } from "@/catalog"
 import { type AgentTokenResponse, UNKNOWN_SESSION_CODE } from "@/domain"
 import { setConfirmationWait, setQuotationWait, setToolCatalog } from "@/tools"
-import fixture from "../../../eval/fixtures/catalog-fixture.json"
+import fixture from "../../../tools/eval/fixtures/catalog-fixture.json"
 import {
   agentTokenRequest,
   configureVendorEnv,

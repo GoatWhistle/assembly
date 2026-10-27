@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { coverage } from "../../scripts/measure/audit-checksums"
+import { coverage } from "../../tools/scripts/measure/audit-checksums"
 
 const rows = coverage(40)
 

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 import { loadCatalog } from "@/catalog"
-import { collisions } from "../../scripts/measure/audit-catalog"
+import { collisions } from "../../tools/scripts/measure/audit-catalog"
 
 const rows = collisions()
 const kind = (name: string) => rows.filter((row) => row.kind === name)
@@ -63,7 +63,7 @@ describe("our own detector, pointed at our own catalogue", () => {
     }
   })
 
-  it("reproduces the exact figures eval/REPORT.md publishes for the catalogue self-audit", () => {
+  it("reproduces the exact figures tools/eval/REPORT.md publishes for the catalogue self-audit", () => {
     expect(
       rows.length,
       "the LASA-coverage section cites 131 total collisions; a rebuilt catalogue that moves this number silently invalidates the published split",
@@ -80,7 +80,7 @@ describe("our own detector, pointed at our own catalogue", () => {
     const index = loadCatalog()
     expect(
       index.bySkeleton.size,
-      "eval/REPORT.md cites 5707 distinct skeletons over 3730 drugs; this was previously unreproducible by any single command",
+      "tools/eval/REPORT.md cites 5707 distinct skeletons over 3730 drugs; this was previously unreproducible by any single command",
     ).toBe(5707)
   })
 })

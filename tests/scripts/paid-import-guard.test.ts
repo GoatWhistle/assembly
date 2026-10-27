@@ -54,7 +54,7 @@ describe("a script that opens a paid socket must not do so merely by being impor
       const source = readFileSync(path, "utf8")
       if (opensAPaidPathAtImport(source)) {
         offenders.push(
-          `${path} constructs a paid socket and calls its main unconditionally on import, which is the defect scripts/measure/measure-eer.ts once had: importing anything from it ran the whole paid path`,
+          `${path} constructs a paid socket and calls its main unconditionally on import, which is the defect tools/scripts/measure/measure-eer.ts once had: importing anything from it ran the whole paid path`,
         )
       }
     }
@@ -73,7 +73,7 @@ describe("a script that opens a paid socket must not do so merely by being impor
     ].join("\n")
     expect(
       opensAPaidPathAtImport(unguarded),
-      "the detector must catch the exact shape scripts/measure/measure-eer.ts shipped with before it was fixed",
+      "the detector must catch the exact shape tools/scripts/measure/measure-eer.ts shipped with before it was fixed",
     ).toBe(true)
   })
 
@@ -91,7 +91,7 @@ describe("a script that opens a paid socket must not do so merely by being impor
     ].join("\n")
     expect(
       opensAPaidPathAtImport(guarded),
-      "a script guarded the same way scripts/measure/measure-eer.ts was fixed must not be flagged",
+      "a script guarded the same way tools/scripts/measure/measure-eer.ts was fixed must not be flagged",
     ).toBe(false)
   })
 
@@ -105,7 +105,7 @@ describe("a script that opens a paid socket must not do so merely by being impor
     ].join("\n")
     expect(
       opensAPaidPathAtImport(library),
-      "scripts/eer/transcribe.ts is exactly this shape: it constructs a WebSocket inside an exported function and calls nothing at module scope, so importing it opens no socket",
+      "tools/scripts/eer/transcribe.ts is exactly this shape: it constructs a WebSocket inside an exported function and calls nothing at module scope, so importing it opens no socket",
     ).toBe(false)
   })
 })

@@ -22,7 +22,7 @@ import { pageMetadata } from "@/site/page-metadata"
 import { OVERVIEW_SECTIONS } from "../docs-map"
 import styles from "./styles.module.css"
 
-const ISMP_COMMAND = "npx tsx scripts/measure/ismp-coverage.ts"
+const ISMP_COMMAND = "npx tsx tools/scripts/measure/ismp-coverage.ts"
 
 export const metadata: Metadata = pageMetadata({
   title: "Docs",

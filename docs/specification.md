@@ -23,7 +23,7 @@ no drug name may reach the recognizer's biasing list, and what each metric count
 refuses to count.
 
 No figure on this page is a measurement. Thresholds, attempt limits and budgets are chosen
-defaults. The measurements are in [../eval/REPORT.md](../eval/REPORT.md) and
+defaults. The measurements are in [../tools/eval/REPORT.md](../tools/eval/REPORT.md) and
 [evidence](evidence.md), each with the command that produced it and the size of its set.
 The one vendor figure quoted here (16.92% entity errors in the benchmark's names category)
 is AssemblyAI's publication, cited in [sources](sources.md) and not re-measured by this
@@ -42,7 +42,7 @@ repository.
 | Tool behaviour | [`src/tools/`](../src/tools/), served from [`app/api/tools/`](../app/api/tools/) |
 | System prompt | [`src/agent/prompt.ts`](../src/agent/prompt.ts) |
 | Keyterms | [`src/lasa/keyterms.ts`](../src/lasa/keyterms.ts) |
-| Metrics | [`scripts/measure/`](../scripts/measure/), [`scripts/eer/`](../scripts/eer/), [`src/sessions/metrics.ts`](../src/sessions/metrics.ts), [`src/stats/wilson.ts`](../src/stats/wilson.ts) |
+| Metrics | [`tools/scripts/measure/`](../tools/scripts/measure/), [`tools/scripts/eer/`](../tools/scripts/eer/), [`src/sessions/metrics.ts`](../src/sessions/metrics.ts), [`src/stats/wilson.ts`](../src/stats/wilson.ts) |
 
 ---
 
@@ -326,7 +326,7 @@ checks it at every confidence including 1.0.
 **The gate derives the pair risk from the value itself.** `pairRisk()` calls
 `lasaRiskFor(normalizedValue)` rather than trusting the `lasa` field the caller filled in,
 so a caller that forgets the risk cannot skip the rule. The mutation
-`lasa_trusts_caller_field` in `scripts/checks/gate-mutations.txt` guards it.
+`lasa_trusts_caller_field` in `tools/scripts/checks/gate-mutations.txt` guards it.
 
 **The re-ask wording comes from the gate, not from the model.** The decision carries the
 sentence (`agentUtterance`) and the tool returns it as `say_to_caller`, so the logged
@@ -425,7 +425,7 @@ partner in `confusable_with`. That is an optimisation, not a protection: the gat
 the hint is in the prompt.**
 
 No network call happens at runtime. The catalogue is built offline by
-`scripts/build/ndc.ts` into `data/catalog.json` and read through `src/catalog/`.
+`tools/scripts/build/ndc.ts` into `data/catalog.json` and read through `src/catalog/`.
 
 ### 4.2 `validate_prescriber`
 
@@ -702,7 +702,7 @@ recognizer's `domain=medical-v1` mode, a catalogue lookup, and the gate.
 
 ## 7. Metrics: what each figure counts and refuses to count
 
-No results are on this page. [../eval/REPORT.md](../eval/REPORT.md) holds each figure with
+No results are on this page. [../tools/eval/REPORT.md](../tools/eval/REPORT.md) holds each figure with
 its command and set size, and
 [`tests/scripts/honest-report-agreement.test.ts`](../tests/scripts/honest-report-agreement.test.ts)
 runs each anchored command and requires its printed figures to appear in the report, so a
@@ -722,14 +722,14 @@ millisecond time, the field and the reason code where one applies.
 
 | Metric | Definition as implemented | Code | Command |
 |---|---|---|---|
-| Entity Error Rate | wrong utterances over utterances, one drug name per utterance | [`scripts/eer/score.ts`](../scripts/eer/score.ts) | `make eval`, `eval-control`, `eval-native16`, `eval-heldout` (paid); `npx tsx scripts/eer/report.ts <set>` over a recorded run (free) |
-| Finalization delay | from the last audio frame sent to the first `Turn` with `end_of_turn: true`; P50, P95 and max | [`scripts/eer/transcribe.ts`](../scripts/eer/transcribe.ts), [`scripts/eer/report.ts`](../scripts/eer/report.ts) | the same runs |
-| Latency budget | the count of recorded values over each budget in `LATENCY_BUDGET_MS`; see below | [`scripts/measure/latency-budget.ts`](../scripts/measure/latency-budget.ts), [`src/domain/latency-budget.ts`](../src/domain/latency-budget.ts) | `make latency-budget` (free) |
-| Socket open, first `Turn` after open | from connect to open, and from open to the first `Turn` message | [`scripts/eer/transcribe.ts`](../scripts/eer/transcribe.ts) | the EER runs |
-| Gate decision time | the time `decide()` takes over the synthesised fixtures | [`scripts/measure/measure-gate-latency.ts`](../scripts/measure/measure-gate-latency.ts) | `make measure` (free) |
-| Which mechanism catches which error | each recorded utterance assigned to the first branch `decide()` takes under the shipped drug-name policy | [`scripts/measure/coverage-matrix.ts`](../scripts/measure/coverage-matrix.ts) | `make coverage-matrix` (free) |
-| What a reflex yes writes | the same candidates through three policy arms | [`scripts/measure/ab-gate.ts`](../scripts/measure/ab-gate.ts), [`scripts/arms/`](../scripts/arms/) | `make ab-gate` (free) |
-| Checksum coverage | every single-digit substitution and adjacent transposition over valid identifiers | [`scripts/measure/audit-checksums.ts`](../scripts/measure/audit-checksums.ts) | `make audit-checksums` (free) |
+| Entity Error Rate | wrong utterances over utterances, one drug name per utterance | [`tools/scripts/eer/score.ts`](../tools/scripts/eer/score.ts) | `make eval`, `eval-control`, `eval-native16`, `eval-heldout` (paid); `npx tsx tools/scripts/eer/report.ts <set>` over a recorded run (free) |
+| Finalization delay | from the last audio frame sent to the first `Turn` with `end_of_turn: true`; P50, P95 and max | [`tools/scripts/eer/transcribe.ts`](../tools/scripts/eer/transcribe.ts), [`tools/scripts/eer/report.ts`](../tools/scripts/eer/report.ts) | the same runs |
+| Latency budget | the count of recorded values over each budget in `LATENCY_BUDGET_MS`; see below | [`tools/scripts/measure/latency-budget.ts`](../tools/scripts/measure/latency-budget.ts), [`src/domain/latency-budget.ts`](../src/domain/latency-budget.ts) | `make latency-budget` (free) |
+| Socket open, first `Turn` after open | from connect to open, and from open to the first `Turn` message | [`tools/scripts/eer/transcribe.ts`](../tools/scripts/eer/transcribe.ts) | the EER runs |
+| Gate decision time | the time `decide()` takes over the synthesised fixtures | [`tools/scripts/measure/measure-gate-latency.ts`](../tools/scripts/measure/measure-gate-latency.ts) | `make measure` (free) |
+| Which mechanism catches which error | each recorded utterance assigned to the first branch `decide()` takes under the shipped drug-name policy | [`tools/scripts/measure/coverage-matrix.ts`](../tools/scripts/measure/coverage-matrix.ts) | `make coverage-matrix` (free) |
+| What a reflex yes writes | the same candidates through three policy arms | [`tools/scripts/measure/ab-gate.ts`](../tools/scripts/measure/ab-gate.ts), [`tools/scripts/arms/`](../tools/scripts/arms/) | `make ab-gate` (free) |
+| Checksum coverage | every single-digit substitution and adjacent transposition over valid identifiers | [`tools/scripts/measure/audit-checksums.ts`](../tools/scripts/measure/audit-checksums.ts) | `make audit-checksums` (free) |
 | Ask rate on `/metrics` | decisions whose action is not `accept`, over all stored decisions, by reason code | [`src/sessions/metrics.ts`](../src/sessions/metrics.ts) | the `/api/metrics` route |
 
 **Entity Error Rate.** The transcript is lowercased, stripped of non-letters and of the
@@ -803,11 +803,11 @@ script computes them.
 Without these rules no figure above is worth anything.
 
 1. **The held-out set is labelled once and then sealed.** `make seal-heldout` records a
-   digest of `eval/heldout/`; `make heldout-seal`, a step of `make verify`, fails if the set
+   digest of `tools/eval/heldout/`; `make heldout-seal`, a step of `make verify`, fails if the set
    changed afterwards, and also fails on a populated set nobody sealed.
 2. **It is not opened between labelling and the final evaluation**: not for debugging, not
    for one file, not for tuning.
-3. **Tuning happens on the development set** (`eval/dev`) only.
+3. **Tuning happens on the development set** (`tools/eval/dev`) only.
 4. **The final evaluation is one run at one commit** (`make eval-heldout`). A second run
    after a code change is no longer held-out, and if one becomes necessary the report says
    the set was compromised and shows both numbers.

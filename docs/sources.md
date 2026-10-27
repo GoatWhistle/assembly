@@ -25,7 +25,7 @@ one say why. Dates in the source column are publication dates or editions.
 ## What does the vendor publish about recognition errors?
 
 These are AssemblyAI's own figures. None is re-measured here; the project's own measurements
-are in [eval/REPORT.md](../eval/REPORT.md).
+are in [tools/eval/REPORT.md](../tools/eval/REPORT.md).
 
 | Claim | Exact wording or figure | Source |
 |---|---|---|

@@ -9,7 +9,7 @@ import {
   CopyButton,
 } from "@/shared/ui/primitives/copy-button"
 
-const COMMAND = "npx tsx scripts/measure/ismp-coverage.ts"
+const COMMAND = "npx tsx tools/scripts/measure/ismp-coverage.ts"
 
 function stubClipboard(writeText: (value: string) => Promise<void>) {
   Object.defineProperty(globalThis.navigator, "clipboard", {

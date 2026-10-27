@@ -9,7 +9,7 @@ test.describe("the evidence surfaces a judge is sent to", () => {
       page.getByText(/asks about every correct drug name: (\d+|—) of (\d+|—)/i).first(),
     ).toBeVisible()
     await expect(page.getByRole("region", { name: /Shipped policy figures/ })).toBeVisible()
-    await expect(page.getByText("npx tsx scripts/measure/ab-gate.ts").first()).toBeVisible()
+    await expect(page.getByText("npx tsx tools/scripts/measure/ab-gate.ts").first()).toBeVisible()
     await expect(page.locator("[data-headline='catch']")).toBeVisible()
     await expect(page.locator("[data-headline='cost']")).toBeVisible()
     await expect(page.getByRole("link", { name: /Benchmark/ }).first()).toBeVisible()

@@ -174,14 +174,14 @@ The consequence is that provenance is client-supplied data; [security](security.
 ## What has been shown, and what has not?
 
 Every figure, with its command and set size, is in [evidence](evidence.md) and
-[eval/REPORT.md](../eval/REPORT.md). The four that bear on the case:
+[tools/eval/REPORT.md](../tools/eval/REPORT.md). The four that bear on the case:
 
 | Question | Result | Status |
 |---|---|---|
-| What does a reflex "yes" write, with the pair rule on and off? | Off: 20 of 20 constructed pair mishearings are ordered. On: 0 of 20, at a cost of 4 contrastive questions on 20 correct values (`npx tsx scripts/measure/ab-gate.ts`) | **Measured**, offline, constructed mishearings |
+| What does a reflex "yes" write, with the pair rule on and off? | Off: 20 of 20 constructed pair mishearings are ordered. On: 0 of 20, at a cost of 4 contrastive questions on 20 correct values (`npx tsx tools/scripts/measure/ab-gate.ts`) | **Measured**, offline, constructed mishearings |
 | Does the recognizer confidently turn a listed name into its partner? | Not observed: 0 of 186 scored degraded utterances, synthesised voices ([evidence](evidence.md#can-the-recognizer-be-confident-and-wrong)) | **Measured** |
-| Does a whole call reach a committed order? | On production, all six scenarios have a passing run: three committed an order, three completed (`eval/live/runs.json`) | **Observed**, synthesised caller |
-| Does any of it hold with a human voice? | No human recording exists; the script is the [voice set](../eval/live/voice-set.md) | **Not measured** |
+| Does a whole call reach a committed order? | On production, all six scenarios have a passing run: three committed an order, three completed (`tools/eval/live/runs.json`) | **Observed**, synthesised caller |
+| Does any of it hold with a human voice? | No human recording exists; the script is the [voice set](../tools/eval/live/voice-set.md) | **Not measured** |
 
 The second row is the product's weakest point, stated at full strength: the confident
 substitution the pair rule exists for has not been seen in this corpus. The rule rests on the
@@ -211,11 +211,11 @@ drug event, not a dispensing error, and it is not our measurement.
 
 **What a call costs to run.** The two sockets bill $5.10 an hour at the vendor's list rates
 ([cost and budget](cost-and-budget.md)). The two production calls that committed an order
-used at most 269 s and 289 s of socket time, $0.38 and $0.41 (`eval/live/runs.json`;
+used at most 269 s and 289 s of socket time, $0.38 and $0.41 (`tools/eval/live/runs.json`;
 **Observed**, two calls, synthesised caller, harness wall clock as an upper bound). The pair
 rule's price in call time is questions: on the recorded control corpus the full list puts 21
 of 59 correct drug names to a contrastive question, on the held-out corpus 6 of 44
-(`npx tsx scripts/measure/ismp-coverage.ts`).
+(`npx tsx tools/scripts/measure/ismp-coverage.ts`).
 
 **Who would buy, and what.** **Assumption, not result**: no buyer has been interviewed.
 

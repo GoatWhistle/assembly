@@ -8,9 +8,9 @@ type PolicySource = {
   readonly setDescription: string
 }
 
-const COVERAGE = "npx tsx scripts/measure/coverage-matrix.ts"
-const AB_GATE = "npx tsx scripts/measure/ab-gate.ts"
-const ISMP = "npx tsx scripts/measure/ismp-coverage.ts"
+const COVERAGE = "npx tsx tools/scripts/measure/coverage-matrix.ts"
+const AB_GATE = "npx tsx tools/scripts/measure/ab-gate.ts"
+const ISMP = "npx tsx tools/scripts/measure/ismp-coverage.ts"
 
 const SOURCES: ReadonlyMap<string, PolicySource> = new Map([
   [
@@ -40,19 +40,19 @@ const SOURCES: ReadonlyMap<string, PolicySource> = new Map([
 
 const REPORT_NOTES: ReadonlyMap<string, string> = new Map([
   [
-    "npx tsx scripts/eer/report.ts eval/control",
+    "npx tsx tools/scripts/eer/report.ts tools/eval/control",
     "The control-set run from the table above, as the report prints it: the same measurement, not a second one.",
   ],
   [
-    "npx tsx scripts/measure/audit-checksums.ts 200",
+    "npx tsx tools/scripts/measure/audit-checksums.ts 200",
     "Every single-digit substitution and every adjacent transposition of 200 valid identifiers of each kind, enumerated rather than sampled. The two checksums are not equally strong, and the rows say by how much.",
   ],
   [
-    "npx tsx scripts/measure/analyse-calibration.ts",
+    "npx tsx tools/scripts/measure/analyse-calibration.ts",
     "Of the recorded utterances whose reported confidence fell in this band, the share whose drug name was right.",
   ],
   [
-    "npx tsx scripts/measure/analyse-rarity.ts",
+    "npx tsx tools/scripts/measure/analyse-rarity.ts",
     "The control corpus split by catalogue combinations. The pre-registered held-out run did not replicate this gap; the Measurements page publishes that negative result.",
   ],
 ])

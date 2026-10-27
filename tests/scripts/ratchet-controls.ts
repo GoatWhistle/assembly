@@ -20,7 +20,7 @@ const CYRILLIC_WORD = String.fromCharCode(1087, 1088, 1080, 1074, 1077, 1090)
 export const CONTROLS: readonly Control[] = [
   {
     ratchet: "tokens",
-    script: "scripts/checks/tokens.mjs",
+    script: "tools/scripts/checks/tokens.mjs",
     runner: "node",
     file: "src/features/__control__/styles.module.css",
     content: ".control {\n  color: #ff00ff;\n}\n",
@@ -28,7 +28,7 @@ export const CONTROLS: readonly Control[] = [
   },
   {
     ratchet: "server-only",
-    script: "scripts/checks/server-only.mjs",
+    script: "tools/scripts/checks/server-only.mjs",
     runner: "node",
     file: "src/features/__control__/leak.ts",
     content: 'import { loadCatalog } from "@/catalog"\n\nexport const control = loadCatalog\n',
@@ -36,7 +36,7 @@ export const CONTROLS: readonly Control[] = [
   },
   {
     ratchet: "ascii",
-    script: "scripts/checks/ascii.sh",
+    script: "tools/scripts/checks/ascii.sh",
     runner: "bash",
     file: "src/features/__control__/language.ts",
     content: `export const control = "${CYRILLIC_WORD}"\n`,
@@ -44,7 +44,7 @@ export const CONTROLS: readonly Control[] = [
   },
   {
     ratchet: "package-subject",
-    script: "scripts/checks/package-subject.sh",
+    script: "tools/scripts/checks/package-subject.sh",
     runner: "bash",
     file: "src/features/utils/anything.ts",
     content: "export const control = 1\n",
@@ -53,7 +53,7 @@ export const CONTROLS: readonly Control[] = [
   },
   {
     ratchet: "file-length",
-    script: "scripts/checks/file-length.sh",
+    script: "tools/scripts/checks/file-length.sh",
     runner: "bash",
     file: "src/features/__control__/long.ts",
     content: "export const filler = 1\n".repeat(300),
@@ -61,7 +61,7 @@ export const CONTROLS: readonly Control[] = [
   },
   {
     ratchet: "token-refs",
-    script: "scripts/checks/token-refs.mjs",
+    script: "tools/scripts/checks/token-refs.mjs",
     runner: "node",
     file: "src/features/__control__/styles.module.css",
     content: ".control {\n  color: var(--token-that-does-not-exist);\n}\n",
@@ -69,7 +69,7 @@ export const CONTROLS: readonly Control[] = [
   },
   {
     ratchet: "colocation",
-    script: "scripts/checks/colocation.mjs",
+    script: "tools/scripts/checks/colocation.mjs",
     runner: "node",
     file: "src/features/__control__/orphan.module.css",
     content: ".control {\n  display: block;\n}\n",
@@ -77,7 +77,7 @@ export const CONTROLS: readonly Control[] = [
   },
   {
     ratchet: "css-dead",
-    script: "scripts/checks/css-dead.mjs",
+    script: "tools/scripts/checks/css-dead.mjs",
     runner: "node",
     file: "src/features/__control__/styles.module.css",
     content: ".neverRead {\n  display: block;\n}\n",
@@ -93,7 +93,7 @@ export const CONTROLS: readonly Control[] = [
   },
   {
     ratchet: "confidence-language",
-    script: "scripts/checks/confidence-language.mjs",
+    script: "tools/scripts/checks/confidence-language.mjs",
     runner: "node",
     file: "src/features/__control__/index.tsx",
     content: "export function Control() {\n  return <p>Confidence score: 92% quality</p>\n}\n",
@@ -101,7 +101,7 @@ export const CONTROLS: readonly Control[] = [
   },
   {
     ratchet: "touch-targets",
-    script: "scripts/checks/touch-targets.mjs",
+    script: "tools/scripts/checks/touch-targets.mjs",
     runner: "node",
     file: "src/features/__control__/styles.module.css",
     content: ".control {\n  cursor: pointer;\n  min-height: 1rem;\n}\n",
@@ -109,7 +109,7 @@ export const CONTROLS: readonly Control[] = [
   },
   {
     ratchet: "secrets",
-    script: "scripts/checks/secrets.sh",
+    script: "tools/scripts/checks/secrets.sh",
     runner: "bash",
     file: "src/features/__control__/leak-key.ts",
     content: "export const control = process.env.ASSEMBLYAI_API_KEY\n",
@@ -118,7 +118,7 @@ export const CONTROLS: readonly Control[] = [
   {
     ratchet: "file-length",
     variant: "mjs",
-    script: "scripts/checks/file-length.sh",
+    script: "tools/scripts/checks/file-length.sh",
     runner: "bash",
     file: "src/features/__control__/long.mjs",
     content: "export const filler = 1\n".repeat(300),
@@ -126,7 +126,7 @@ export const CONTROLS: readonly Control[] = [
   },
   {
     ratchet: "import-cycles",
-    script: "scripts/checks/import-cycles.sh",
+    script: "tools/scripts/checks/import-cycles.sh",
     runner: "bash",
     file: "tests/__control__/cycle-a.ts",
     content: 'import { b } from "./cycle-b"\n\nexport const a = b\n',
@@ -141,15 +141,15 @@ export const CONTROLS: readonly Control[] = [
   },
   {
     ratchet: "package-size",
-    script: "scripts/checks/package-size.sh",
+    script: "tools/scripts/checks/package-size.sh",
     runner: "bash",
-    file: "scripts/__control__/control-0.ts",
+    file: "tools/scripts/__control__/control-0.ts",
     content: "export const control = 0\n",
     siblings: Array.from({ length: 20 }, (_, index) => ({
-      file: `scripts/__control__/control-${index + 1}.ts`,
+      file: `tools/scripts/__control__/control-${index + 1}.ts`,
       content: `export const control = ${index + 1}\n`,
     })),
-    directory: "scripts/__control__",
-    why: "a scripts directory past twenty sources must fail; scripts/measure reached 21 while scripts were not counted",
+    directory: "tools/scripts/__control__",
+    why: "a scripts directory past twenty sources must fail; tools/scripts/measure reached 21 while scripts were not counted",
   },
 ]

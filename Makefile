@@ -56,7 +56,7 @@ help:
 	@printf "    \033[36m%-16s\033[0m %s\n" "doctor" "The reference agent matches the source and its tool webhooks answer. Opens no socket"
 	@printf "    \033[36m%-16s\033[0m %s\n" "spend" "What the paid API has cost, from the recorded run ledger"
 	@printf "    \033[36m%-16s\033[0m %s\n" "live-runs" "How many paid runs happened, including the discarded ones"
-	@printf "    \033[36m%-16s\033[0m %s\n" "live-set" "Build the human voice manifest from eval/live/voice-set.md"
+	@printf "    \033[36m%-16s\033[0m %s\n" "live-set" "Build the human voice manifest from tools/eval/live/voice-set.md"
 	@printf "    \033[36m%-16s\033[0m %s\n" "live-report" "The human voice stratum, or not measured when no run exists"
 	@printf "    \033[36m%-16s\033[0m %s\n" "keyterms-ablation" "Human voices with and without LASA names in keyterms, from recorded runs"
 	@printf "    \033[36m%-16s\033[0m %s\n" "verify-receipt" "Check an order receipt offline: make verify-receipt FILE=path"
@@ -98,24 +98,24 @@ build:
 	$(RUN) "npm run build"
 
 data:
-	$(RUN) "npx tsx scripts/build/ndc.ts && npx tsx scripts/build/lasa.ts && npx tsx scripts/build/stitch-lasa.ts"
+	$(RUN) "npx tsx tools/scripts/build/ndc.ts && npx tsx tools/scripts/build/lasa.ts && npx tsx tools/scripts/build/stitch-lasa.ts"
 
 agent:
-	$(RUN) "npx tsx scripts/report/create-agent.ts"
+	$(RUN) "npx tsx tools/scripts/report/create-agent.ts"
 
 fixtures:
-	$(RUN) "npx tsx scripts/build/fixtures.ts"
+	$(RUN) "npx tsx tools/scripts/build/fixtures.ts"
 
 corpus:
-	$(RUN) "npx tsx scripts/build/control-set.ts"
-	@powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/build/eer-audio.ps1
-	@powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/build/eer-audio.ps1 -OutDir eval/control/audio -Manifest eval/control/manifest.json -TermsFile eval/control/terms.json
+	$(RUN) "npx tsx tools/scripts/build/control-set.ts"
+	@powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools/scripts/build/eer-audio.ps1
+	@powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools/scripts/build/eer-audio.ps1 -OutDir tools/eval/control/audio -Manifest tools/eval/control/manifest.json -TermsFile tools/eval/control/terms.json
 
 lint:
-	$(RUN) "npx biome check src app tests scripts"
+	$(RUN) "npx biome check src app tests tools/scripts"
 
 format:
-	$(RUN) "npx biome check --write src app tests scripts"
+	$(RUN) "npx biome check --write src app tests tools/scripts"
 
 typecheck:
 	$(RUN) "npx tsc --noEmit"
@@ -127,158 +127,158 @@ e2e:
 	$(RUN) "npx playwright test --config tests/e2e/playwright.config.ts"
 
 file-length:
-	@bash scripts/checks/file-length.sh
+	@bash tools/scripts/checks/file-length.sh
 
 package-size:
-	@bash scripts/checks/package-size.sh
+	@bash tools/scripts/checks/package-size.sh
 
 import-cycles:
-	@bash scripts/checks/import-cycles.sh
+	@bash tools/scripts/checks/import-cycles.sh
 
 package-subject:
-	@bash scripts/checks/package-subject.sh
+	@bash tools/scripts/checks/package-subject.sh
 
 ascii:
-	@bash scripts/checks/ascii.sh
+	@bash tools/scripts/checks/ascii.sh
 
 tokens:
-	@node scripts/checks/tokens.mjs
+	@node tools/scripts/checks/tokens.mjs
 
 token-refs:
-	$(RUN) "node scripts/checks/token-refs.mjs"
+	$(RUN) "node tools/scripts/checks/token-refs.mjs"
 
 colocation:
-	$(RUN) "node scripts/checks/colocation.mjs"
+	$(RUN) "node tools/scripts/checks/colocation.mjs"
 
 css-dead:
-	$(RUN) "node scripts/checks/css-dead.mjs"
+	$(RUN) "node tools/scripts/checks/css-dead.mjs"
 
 server-only:
-	$(RUN) "node scripts/checks/server-only.mjs"
+	$(RUN) "node tools/scripts/checks/server-only.mjs"
 
 confidence-language:
-	$(RUN) "node scripts/checks/confidence-language.mjs"
+	$(RUN) "node tools/scripts/checks/confidence-language.mjs"
 
 contrast:
-	$(RUN) "node scripts/checks/contrast.mjs"
+	$(RUN) "node tools/scripts/checks/contrast.mjs"
 
 touch-targets:
-	$(RUN) "node scripts/checks/touch-targets.mjs"
+	$(RUN) "node tools/scripts/checks/touch-targets.mjs"
 
 smoke:
-	$(RUN) "npx tsx scripts/report/smoke-fixtures.ts"
+	$(RUN) "npx tsx tools/scripts/report/smoke-fixtures.ts"
 
 latency-budget:
-	$(RUN) "npx tsx scripts/measure/latency-budget.ts"
+	$(RUN) "npx tsx tools/scripts/measure/latency-budget.ts"
 
 secrets:
-	@bash scripts/checks/secrets.sh
+	@bash tools/scripts/checks/secrets.sh
 
 keyterms-purity:
 	$(RUN) "npx vitest run --config tests/vitest.config.ts tests/lasa/keyterms-purity.test.ts"
 
 heldout-seal:
-	@bash scripts/checks/heldout-seal.sh
+	@bash tools/scripts/checks/heldout-seal.sh
 
 gate-invariant:
-	@bash scripts/checks/gate-invariant.sh
+	@bash tools/scripts/checks/gate-invariant.sh
 
 gate-mutation:
-	@bash scripts/checks/gate-mutation.sh
+	@bash tools/scripts/checks/gate-mutation.sh
 
 verify: $(VERIFY_STEPS)
 
 honest:
-	$(RUN) "npx tsx scripts/report/honest.ts"
+	$(RUN) "npx tsx tools/scripts/report/honest.ts"
 
 audit-checksums:
-	$(RUN) "npx tsx scripts/measure/audit-checksums.ts 200"
+	$(RUN) "npx tsx tools/scripts/measure/audit-checksums.ts 200"
 
 audit-catalog:
-	$(RUN) "npx tsx scripts/measure/audit-catalog.ts"
+	$(RUN) "npx tsx tools/scripts/measure/audit-catalog.ts"
 
 coverage-matrix:
-	$(RUN) "npx tsx scripts/measure/coverage-matrix.ts"
+	$(RUN) "npx tsx tools/scripts/measure/coverage-matrix.ts"
 
 calibration:
-	$(RUN) "npx tsx scripts/measure/analyse-calibration.ts"
+	$(RUN) "npx tsx tools/scripts/measure/analyse-calibration.ts"
 
 rarity:
-	$(RUN) "npx tsx scripts/measure/analyse-rarity.ts"
+	$(RUN) "npx tsx tools/scripts/measure/analyse-rarity.ts"
 
 ab-gate:
-	$(RUN) "npx tsx scripts/measure/ab-gate.ts"
+	$(RUN) "npx tsx tools/scripts/measure/ab-gate.ts"
 
 measure:
-	$(RUN) "npx tsx scripts/measure/measure-latency.ts --runs 30"
+	$(RUN) "npx tsx tools/scripts/measure/measure-latency.ts --runs 30"
 
 doctor:
-	$(RUN) "npx tsx scripts/report/doctor.ts"
+	$(RUN) "npx tsx tools/scripts/report/doctor.ts"
 
 spend:
-	$(RUN) "npx tsx scripts/report/spend-report.ts"
+	$(RUN) "npx tsx tools/scripts/report/spend-report.ts"
 
 live-runs:
-	$(RUN) "npx tsx scripts/report/live-run-count.ts"
+	$(RUN) "npx tsx tools/scripts/report/live-run-count.ts"
 
 live-set:
-	$(RUN) "npx tsx scripts/build/live-set.ts"
+	$(RUN) "npx tsx tools/scripts/build/live-set.ts"
 
 live-report:
-	$(RUN) "npx tsx scripts/report/live-report.ts"
+	$(RUN) "npx tsx tools/scripts/report/live-report.ts"
 
 keyterms-ablation:
-	$(RUN) "npx tsx scripts/measure/keyterms-ablation.ts"
+	$(RUN) "npx tsx tools/scripts/measure/keyterms-ablation.ts"
 
 verify-receipt:
-	$(RUN) "npx tsx scripts/verify-receipt.ts $(FILE)"
+	$(RUN) "npx tsx tools/scripts/verify-receipt.ts $(FILE)"
 
 check-bundle:
-	@bash scripts/checks/check-bundle.sh
+	@bash tools/scripts/checks/check-bundle.sh
 
 prune-agents:
-	$(RUN) "npx tsx scripts/report/prune-agents.ts"
+	$(RUN) "npx tsx tools/scripts/report/prune-agents.ts"
 
 live-smoke:
 	$(RUN) "npx playwright test --config tests/live/playwright.config.ts"
 
 
 eval-live:
-	$(RUN) "npx tsx scripts/measure/measure-live.ts --confirm-paid"
+	$(RUN) "npx tsx tools/scripts/measure/measure-live.ts --confirm-paid"
 
 eval-live-keyterms:
-	$(RUN) "npx tsx scripts/measure/measure-live.ts --confirm-paid --lasa-keyterms"
+	$(RUN) "npx tsx tools/scripts/measure/measure-live.ts --confirm-paid --lasa-keyterms"
 
 eval:
-	$(RUN) "npx tsx scripts/measure/measure-eer.ts --set eval/dev"
+	$(RUN) "npx tsx tools/scripts/measure/measure-eer.ts --set tools/eval/dev"
 
 eval-control:
-	$(RUN) "npx tsx scripts/measure/measure-eer.ts --set eval/control"
+	$(RUN) "npx tsx tools/scripts/measure/measure-eer.ts --set tools/eval/control"
 
 eval-native16:
-	$(RUN) "npx tsx scripts/measure/measure-eer.ts --set eval/native16"
+	$(RUN) "npx tsx tools/scripts/measure/measure-eer.ts --set tools/eval/native16"
 
 eval-keyterms:
-	$(RUN) "npx tsx scripts/measure/measure-eer.ts --set eval/dev --keyterms"
+	$(RUN) "npx tsx tools/scripts/measure/measure-eer.ts --set tools/eval/dev --keyterms"
 
 eval-heldout:
-	$(RUN) "npx tsx scripts/measure/measure-eer.ts --set eval/heldout"
+	$(RUN) "npx tsx tools/scripts/measure/measure-eer.ts --set tools/eval/heldout"
 
 eval-repeat:
-	$(RUN) "npx tsx scripts/measure/measure-eer.ts --set eval/dev --repeat 2"
+	$(RUN) "npx tsx tools/scripts/measure/measure-eer.ts --set tools/eval/dev --repeat 2"
 
 eval-units:
-	$(RUN) "npx tsx scripts/build/unit-set.ts"
-	@powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/build/unit-audio.ps1
-	$(RUN) "npx tsx scripts/measure/measure-units.ts"
+	$(RUN) "npx tsx tools/scripts/build/unit-set.ts"
+	@powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools/scripts/build/unit-audio.ps1
+	$(RUN) "npx tsx tools/scripts/measure/measure-units.ts"
 
 baseline:
-	@bash scripts/checks/file-length.sh --update
-	@bash scripts/checks/package-size.sh --update
-	@bash scripts/checks/ascii.sh --update
+	@bash tools/scripts/checks/file-length.sh --update
+	@bash tools/scripts/checks/package-size.sh --update
+	@bash tools/scripts/checks/ascii.sh --update
 
 seal-heldout:
-	@bash scripts/checks/heldout-seal.sh --seal
+	@bash tools/scripts/checks/heldout-seal.sh --seal
 
 clean:
 	@rm -rf .next coverage test-results playwright-report node_modules/.cache

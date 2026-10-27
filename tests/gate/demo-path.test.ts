@@ -4,7 +4,7 @@ import { FieldName, GateAction, policyFor, ReasonCode, VerdictOutcome } from "@/
 import { decide } from "@/gate"
 import { lasaRiskFor } from "@/lasa"
 import { validateField } from "@/sessions"
-import fixture from "../../eval/fixtures/catalog-fixture.json"
+import fixture from "../../tools/eval/fixtures/catalog-fixture.json"
 import { candidateFor } from "./factory"
 
 const catalog = catalogFromFile(fixture)

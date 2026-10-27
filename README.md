@@ -150,15 +150,15 @@ the browser: the sha256, the DEA and NPI check digits and the catalogue.</sub></
 ## Results
 
 Every figure below is printed by a command in this repository, offline and free. The
-[measurement report](eval/REPORT.md) carries each one with its command and set size, and
+[measurement report](tools/eval/REPORT.md) carries each one with its command and set size, and
 [the evidence page](docs/evidence.md) grades every claim the project makes, from measured
 to assumed.
 
 | Figure | What it shows | Command |
 |---|---|---|
-| Without the pair rule a reflex yes writes 20 of 20 pair mishearings; with it, 0 | The pair rule is the only difference between the two arms | `npx tsx scripts/measure/ab-gate.ts` |
-| 59 of 59 correct drug names are asked about: 25 by the standing read-back, 13 by the threshold, 21 by a contrastive question | The cost side: which question a correct value gets | `npx tsx scripts/measure/coverage-matrix.ts` |
-| The 2023 ISMP list carries 514 pairs over 754 names; 502 of 3730 catalogue drugs carry a listed name | How much of the catalogue the pair rule reaches | `npx tsx scripts/measure/ismp-coverage.ts` |
+| Without the pair rule a reflex yes writes 20 of 20 pair mishearings; with it, 0 | The pair rule is the only difference between the two arms | `npx tsx tools/scripts/measure/ab-gate.ts` |
+| 59 of 59 correct drug names are asked about: 25 by the standing read-back, 13 by the threshold, 21 by a contrastive question | The cost side: which question a correct value gets | `npx tsx tools/scripts/measure/coverage-matrix.ts` |
+| The 2023 ISMP list carries 514 pairs over 754 names; 502 of 3730 catalogue drugs carry a listed name | How much of the catalogue the pair rule reaches | `npx tsx tools/scripts/measure/ismp-coverage.ts` |
 | NPI catches 100% of substitutions, DEA catches 95.2%, over 32 080 mutations | The two checksums are not equally strong, and the policy says so | `make audit-checksums` |
 | 12 of 12 mutations killed | Every gate branch fails its own named test when broken | `make gate-mutation` |
 

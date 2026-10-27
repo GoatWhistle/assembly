@@ -14,13 +14,13 @@ type RawRun = {
   readonly scored: readonly RawScored[]
 }
 
-const REPORT = readFileSync("eval/REPORT.md", "utf8")
+const REPORT = readFileSync("tools/eval/REPORT.md", "utf8")
 const MAKEFILE = readFileSync("Makefile", "utf8")
-const COVERAGE_SCRIPT = readFileSync("scripts/measure/coverage-matrix.ts", "utf8")
+const COVERAGE_SCRIPT = readFileSync("tools/scripts/measure/coverage-matrix.ts", "utf8")
 const THRESHOLD = policyFor(FieldName.DrugName).autoAcceptThreshold
 
 function load(set: string): RawRun {
-  return JSON.parse(readFileSync(`eval/${set}/result-plain.json`, "utf8")) as RawRun
+  return JSON.parse(readFileSync(`tools/eval/${set}/result-plain.json`, "utf8")) as RawRun
 }
 
 function row(id: string) {
@@ -61,7 +61,7 @@ const coverageDate = coverage
 
 describe("published entity error rates match the raw run files", () => {
   for (const set of ["dev", "control", "native16"]) {
-    it(`eer-${set} equals what eval/${set}/result-plain.json holds`, () => {
+    it(`eer-${set} equals what tools/eval/${set}/result-plain.json holds`, () => {
       const raw = load(set)
       const errors = raw.scored.filter((entry) => !entry.correct).length
       const published = row(`eer-${set}`)
@@ -69,18 +69,18 @@ describe("published entity error rates match the raw run files", () => {
       expect(published.value?.startsWith(`${point} [`), `${published.value}`).toBe(true)
       expect(published.n).toBe(raw.scored.length)
       expect(published.measuredOn).toBe(raw.measuredAt.slice(0, 10))
-      expect(REPORT, `eval/REPORT.md does not publish ${point} for ${set}`).toContain(
+      expect(REPORT, `tools/eval/REPORT.md does not publish ${point} for ${set}`).toContain(
         `**${point}**`,
       )
     })
 
-    it(`eer-${set} names a make target that measures eval/${set}`, () => {
+    it(`eer-${set} names a make target that measures tools/eval/${set}`, () => {
       const recipe = targetRecipe(row(`eer-${set}`).command)
       expect(
         recipe,
         `${row(`eer-${set}`).command} is not a target in the Makefile`,
       ).not.toBeNull()
-      expect(recipe).toContain(`measure-eer.ts --set eval/${set}`)
+      expect(recipe).toContain(`measure-eer.ts --set tools/eval/${set}`)
       expect(recipe).not.toContain("--keyterms")
     })
   }
@@ -88,13 +88,13 @@ describe("published entity error rates match the raw run files", () => {
 
 describe("published coverage figures match the runs make coverage-matrix reads", () => {
   it("reads exactly the control and native 16 kHz runs", () => {
-    expect(COVERAGE_SCRIPT).toContain("eval/control/result-plain.json")
-    expect(COVERAGE_SCRIPT).toContain("eval/native16/result-plain.json")
+    expect(COVERAGE_SCRIPT).toContain("tools/eval/control/result-plain.json")
+    expect(COVERAGE_SCRIPT).toContain("tools/eval/native16/result-plain.json")
     expect(
       COVERAGE_SCRIPT,
       "the page pools the same runs as the command it cites, or its figure has the wrong method",
-    ).not.toContain("eval/dev/result-plain.json")
-    expect(targetRecipe("make coverage-matrix")).toContain("scripts/measure/coverage-matrix.ts")
+    ).not.toContain("tools/eval/dev/result-plain.json")
+    expect(targetRecipe("make coverage-matrix")).toContain("tools/scripts/measure/coverage-matrix.ts")
   })
 
   it("errors the recognizer was confident about", () => {

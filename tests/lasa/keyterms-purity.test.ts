@@ -9,7 +9,7 @@ import {
   lasaCheckedTerms,
   normalizeTerm,
 } from "@/lasa"
-import fixture from "../../eval/fixtures/catalog-fixture.json"
+import fixture from "../../tools/eval/fixtures/catalog-fixture.json"
 
 const catalog = catalogFromFile(fixture)
 

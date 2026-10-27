@@ -9,7 +9,7 @@
 **Read this if** you are deciding how far to trust a result, or looking for the weakest point
 before someone else finds it · **Related:** [evidence](evidence.md) ·
 [security](security.md) · [design decisions](design-decisions.md) · [sources](sources.md) ·
-[eval/REPORT.md](../eval/REPORT.md)
+[tools/eval/REPORT.md](../tools/eval/REPORT.md)
 
 Each entry carries a status from the vocabulary in [evidence](evidence.md#how-is-each-claim-graded).
 Every heading below also appears on the site at `/docs/limitations`.
@@ -104,7 +104,7 @@ through February 2023: 514 pairs over 754 names in `data/lasa-pairs.json`, which
 source URL and the PDF's sha256. The curated table in
 [`src/lasa/pairs.ts`](../src/lasa/pairs.ts) holds 20 pairs, each checked by hand against its
 row; it is the core of the demo and of the evaluation corpora. Both counts come from
-`npx tsx scripts/measure/ismp-coverage.ts`; the coverage method is in
+`npx tsx tools/scripts/measure/ismp-coverage.ts`; the coverage method is in
 [evidence](evidence.md#how-much-of-the-published-list-does-the-rule-cover).
 
 **A published list only catches the pairs it publishes.** Lisinopril misheard as bisoprolol is
@@ -114,7 +114,7 @@ would pass on confidence and a valid catalogue entry, and only the plain read-ba
 reflex "yes" passes, would stand between it and the order. A pair we derive ourselves is never
 added.
 
-A newer edition of the list means rebuilding with `make data`; `scripts/build/lasa.ts` refuses
+A newer edition of the list means rebuilding with `make data`; `tools/scripts/build/lasa.ts` refuses
 to overwrite the snapshot when a parse falls below its 40-pair floor. A brand name is recognised
 only when the catalogue lists it under `proprietaryNames`. The rule has a price, from the same
 command: 502 of 3730 catalogue drugs carry a listed name, and 21 of the 59 correct values of
@@ -125,7 +125,7 @@ the control corpus get a contrastive question.
 **Status: Measured against synthetic speech, and labelled everywhere.**
 
 We found no open English corpus of human speech reading drug names. Entity Error Rate in
-[eval/REPORT.md](../eval/REPORT.md) measures the live recognizer against speech from a desktop
+[tools/eval/REPORT.md](../tools/eval/REPORT.md) measures the live recognizer against speech from a desktop
 speech synthesiser: synthetic audio, real recognition. Every figure derived from it inherits
 that boundary.
 
@@ -135,7 +135,7 @@ Every listed name in our synthesised corpora was re-recognized live through a te
 white noise at 10 and 5 dB and a speed-up: 188 utterances, 186 of them scored (two sessions
 closed on a transport error, 1006 and 1008, and are excluded rather than counted as
 mishearings). None came back as its published partner, and none of the 18 errors reached the
-0.95 threshold (`npx tsx scripts/measure/analyse-stress.ts`). Some did become other real
+0.95 threshold (`npx tsx tools/scripts/measure/analyse-stress.ts`). Some did become other real
 drugs (azacitidine as azithromycin, silodosin as thalidomide), which is the shape of the
 error, one step short. The replay that shows hydromorphone heard as morphine at 1.00 is
 staged and labelled so. The pair rule rests on the published list and on people mishearing
@@ -143,7 +143,7 @@ these names, not on our corpus.
 
 ### Live calls on production used a synthesised caller
 
-**Status: Observed.** The production live runs in `eval/live/runs.json` drive a real browser
+**Status: Observed.** The production live runs in `tools/eval/live/runs.json` drive a real browser
 (Firefox, `--project firefox-fake-caller`) against the production deployment, with both real
 AssemblyAI sockets, the vendor's recognizer and managed language model, our server, the gate
 and the order store. The caller is synthesised: prepared speech injected into the page's
@@ -154,7 +154,7 @@ microphone was used.
 On production `clean-order`, `lasa-named` and `commit-hold` committed their orders, and
 `yeah-no`, `barge-in` and `npi-groups` completed: each scenario has one passing run. The
 scenario table, with every billed and refused attempt, is in
-[eval/REPORT.md](../eval/REPORT.md#live-runs-on-production).
+[tools/eval/REPORT.md](../tools/eval/REPORT.md#live-runs-on-production).
 
 ### What is deliberately not measured
 
@@ -172,7 +172,7 @@ scenario table, with every billed and refused attempt, is in
 
 **Status: Assumption, not result, stated at the head of the report.**
 
-Every threshold in `eval/REPORT.md` is a chosen default, reasoned from the cost of an error in
+Every threshold in `tools/eval/REPORT.md` is a chosen default, reasoned from the cost of an error in
 each field before any audio existed. None was tuned on any set. The held-out set was sealed
 before it was opened, `make heldout-seal` fails if it changes, and it has been opened once.
 
@@ -182,14 +182,14 @@ before it was opened, `make heldout-seal` fails if it changes, and it has been o
 
 We predicted that rare drug names would be measurably harder to recognise than common ones.
 The prediction, the decision rule and the falsification condition are in
-[`eval/heldout-preregistration.md`](../eval/heldout-preregistration.md), written before the
+[`tools/eval/heldout-preregistration.md`](../tools/eval/heldout-preregistration.md), written before the
 held-out audio existed. The rule required non-overlapping 95% Wilson intervals between the
 rare and common strata.
 
 They overlap heavily, and the rare and mid strata are identical at 30.0% each
-(`npx tsx scripts/measure/analyse-rarity.ts --set eval/heldout --strata 3`). The control
-corpus suggests 43.8% against 16.7% (`npx tsx scripts/measure/analyse-rarity.ts --set
-eval/control`); that gap does not replicate and on the evidence is sampling noise in a set of
+(`npx tsx tools/scripts/measure/analyse-rarity.ts --set tools/eval/heldout --strata 3`). The control
+corpus suggests 43.8% against 16.7% (`npx tsx tools/scripts/measure/analyse-rarity.ts --set
+tools/eval/control`); that gap does not replicate and on the evidence is sampling noise in a set of
 forty. The negative result stays in the report, because a sealed set can be opened only once
 and dropping a failed pre-registered hypothesis is what makes published benchmarks
 untrustworthy.
@@ -287,7 +287,7 @@ claim this project refuses to publish. Consent to sending the voice to AssemblyA
 by using the application; no consent screen names the vendor or links its policy before a
 session starts. All data in this project's own demonstrations and evaluation runs is
 synthetic, so this limitation concerns real use of the application, not anything published in
-`eval/REPORT.md`.
+`tools/eval/REPORT.md`.
 
 ## In a real emergency, do not use this application
 

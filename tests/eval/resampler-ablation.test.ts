@@ -1,8 +1,8 @@
 import { existsSync, readFileSync } from "node:fs"
 import { describe, expect, it } from "vitest"
 
-const RESAMPLED = "eval/control/result-plain.json"
-const NATIVE = "eval/native16/result-plain.json"
+const RESAMPLED = "tools/eval/control/result-plain.json"
+const NATIVE = "tools/eval/native16/result-plain.json"
 
 type Scored = {
   readonly spoken: string
@@ -27,7 +27,7 @@ describe("the resampler is not what produced the recognizer errors", () => {
     const native = load(NATIVE)
     if (resampled === null || native === null) {
       expect(
-        readFileSync("eval/REPORT.md", "utf8").includes("synthesised natively at 16000"),
+        readFileSync("tools/eval/REPORT.md", "utf8").includes("synthesised natively at 16000"),
         "the report cites a native-rate arm whose recorded run is missing from disk",
       ).toBe(false)
       return

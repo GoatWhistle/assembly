@@ -11,7 +11,7 @@ import {
   receiptDigest,
 } from "@/domain"
 import { createMemoryStore, installSessionStore } from "@/sessions"
-import { verifyReceiptFile } from "../../scripts/verify-receipt"
+import { verifyReceiptFile } from "../../tools/scripts/verify-receipt"
 import { commitHonestOrder } from "./committed-order"
 import { resetToolEnvironment, SESSION } from "./harness"
 

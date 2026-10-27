@@ -2,7 +2,7 @@ import { copyFileSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "
 import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { afterEach, describe, expect, it } from "vitest"
-import { readRegistry } from "../../scripts/live/run-registry"
+import { readRegistry } from "../../tools/scripts/live/run-registry"
 import {
   ACCEPTANCE_BOUNDARIES,
   deploymentBoundary,
@@ -11,7 +11,7 @@ import {
   type ReceiptArgs,
   type ReceiptDeps,
   recordReceipt,
-} from "../../scripts/live-receipt"
+} from "../../tools/scripts/live-receipt"
 
 const BASE = [
   "--deployment",
@@ -41,7 +41,7 @@ function sandbox(fetchImpl: typeof fetch): ReceiptDeps & { fetched: string[] } {
   const registry = join(dir, "runs.json")
   const ledger = join(dir, "ledger.json")
   writeFileSync(registry, JSON.stringify({ runs: [] }), "utf8")
-  copyFileSync("eval/spend-ledger.json", ledger)
+  copyFileSync("tools/eval/spend-ledger.json", ledger)
   const fetched: string[] = []
   return {
     fetched,
@@ -68,7 +68,7 @@ describe("live-receipt records a live smoke as what it is", () => {
   it("keeps the acceptance-call defaults when no kind or command is given", () => {
     const args = parsed(BASE)
     expect(args.kind).toBe("acceptance_call")
-    expect(args.command).toBe("npx tsx scripts/live-receipt.ts")
+    expect(args.command).toBe("npx tsx tools/scripts/live-receipt.ts")
   })
 
   it("accepts --kind live_smoke and --command, and refuses an unknown kind", () => {

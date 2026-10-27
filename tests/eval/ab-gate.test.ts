@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest"
 import { PAIR_RULE_FLAG } from "@/domain"
-import { buildAbCorpus } from "../../scripts/arms/ab-corpus"
-import { armFor } from "../../scripts/arms/shipped-policy"
-import { summariesFor } from "../../scripts/measure/ab-gate"
+import { buildAbCorpus } from "../../tools/scripts/arms/ab-corpus"
+import { armFor } from "../../tools/scripts/arms/shipped-policy"
+import { summariesFor } from "../../tools/scripts/measure/ab-gate"
 
 const corpus = buildAbCorpus(20260916)
 const summaries = summariesFor(corpus)

@@ -1,10 +1,10 @@
 import { execFileSync } from "node:child_process"
 import { readFileSync } from "node:fs"
 import { describe, expect, it } from "vitest"
-import { EXPECTATIONS, SMOKE_SCOPE } from "../../scripts/report/smoke-expectations"
+import { EXPECTATIONS, SMOKE_SCOPE } from "../../tools/scripts/report/smoke-expectations"
 
-const SCRIPT = "scripts/report/smoke-fixtures.ts"
-const EXPECTATIONS_FILE = "scripts/report/smoke-expectations.ts"
+const SCRIPT = "tools/scripts/report/smoke-fixtures.ts"
+const EXPECTATIONS_FILE = "tools/scripts/report/smoke-expectations.ts"
 
 function runSmoke(): { code: number; output: string } {
   try {

@@ -24,15 +24,15 @@ list of the names that are confused in practice.
 
 | Source | Licence | Built into, by | Read at runtime by |
 |---|---|---|---|
-| [FDA NDC Directory](https://www.accessdata.fda.gov/cder/ndctext.zip), `product.txt` | public domain (US government) | `data/catalog.json`, by `scripts/build/ndc.ts` | `src/catalog/` |
-| [ISMP List of Confused Drug Names](https://www.ismp.org/system/files/resources/2023-10/ISMP_ConfusedDrugNames_2023.pdf), updated through February 2023 | ISMP publication | `data/lasa-pairs.json`, by `scripts/build/lasa.ts` | `src/lasa/` |
+| [FDA NDC Directory](https://www.accessdata.fda.gov/cder/ndctext.zip), `product.txt` | public domain (US government) | `data/catalog.json`, by `tools/scripts/build/ndc.ts` | `src/catalog/` |
+| [ISMP List of Confused Drug Names](https://www.ismp.org/system/files/resources/2023-10/ISMP_ConfusedDrugNames_2023.pdf), updated through February 2023 | ISMP publication | `data/lasa-pairs.json`, by `tools/scripts/build/lasa.ts` | `src/lasa/` |
 | [ISMP List of Error-Prone Abbreviations](https://www.ismp.org/system/files/resources/2024-04/ISMP_ErrorProneAbbreviation_List.pdf), 2024-04 | ISMP publication | `ISMP_DO_NOT_USE`, transcribed by hand | [`src/validators/sig-abbreviations.ts`](../src/validators/sig-abbreviations.ts) |
 
-`make data` runs `scripts/build/ndc.ts` and `scripts/build/lasa.ts`, then
-`scripts/build/stitch-lasa.ts`, which writes nothing and reports how many curated names the
+`make data` runs `tools/scripts/build/ndc.ts` and `tools/scripts/build/lasa.ts`, then
+`tools/scripts/build/stitch-lasa.ts`, which writes nothing and reports how many curated names the
 catalogue matches. No key and no registration is needed for any of them. Both built files
 carry their own provenance: the source URL, the build time and a sha256 over the content
-(`scripts/build/snapshot.ts`), and the LASA file also records the sha256 of the PDF it was
+(`tools/scripts/build/snapshot.ts`), and the LASA file also records the sha256 of the PDF it was
 parsed from and the page and row of every pair.
 
 ## What does the catalogue need before it is usable?
@@ -61,11 +61,11 @@ spoken "tramadol" misses on a naive comparison. `normalizeDrugName` in
 [`src/lasa/normalize.ts`](../src/lasa/normalize.ts) strips the listed salt suffixes, and the
 catalogue lookup applies it to both the query and the stored names. Over the curated tier's
 40 names, 31 match the committed catalogue by exact name and all 40 after salt stripping
-(`npx tsx scripts/build/stitch-lasa.ts`).
+(`npx tsx tools/scripts/build/stitch-lasa.ts`).
 
 ## How is the LASA table built?
 
-`scripts/build/lasa.ts` parses the PDF with `pdftotext` in two modes (raw for reading order,
+`tools/scripts/build/lasa.ts` parses the PDF with `pdftotext` in two modes (raw for reading order,
 layout for cell boundaries) and resolves a row that spans several lines by the list's own
 symmetry, since every pair appears in both directions. The result has two tiers:
 
@@ -74,7 +74,7 @@ symmetry, since every pair appears in both directions. The result has two tiers:
 | The full list | `ISMP_PAIRS`, `ismpPairCount()` | the product rule: `lasaRiskFor` checks every published pair, and a name can have several partners |
 | The curated tier | `LASA_PAIRS` in [`src/lasa/pairs.ts`](../src/lasa/pairs.ts) | pairs checked by hand against their row; the demo, the evaluation corpora and the spoken-support test use them |
 
-Never quote either count from memory: `npx tsx scripts/measure/ismp-coverage.ts` prints
+Never quote either count from memory: `npx tsx tools/scripts/measure/ismp-coverage.ts` prints
 both, and `tests/lasa/published-count.test.ts` fails if a document states a pair count the
 code does not have. Without the PDF (by default at
 `artefacts/sources/ismp-confused-drug-names-2023.pdf`, or a path passed to the script),
@@ -84,7 +84,7 @@ refuses to overwrite it. A pair we derived ourselves never enters either tier.
 ## What does the arithmetic prove?
 
 Each worked example below is reproduced by `validateNpi` and `validateDea` in
-[`src/validators/`](../src/validators/), and the identifiers in the [voice set](../eval/live/voice-set.md)
+[`src/validators/`](../src/validators/), and the identifiers in the [voice set](../tools/eval/live/voice-set.md)
 must pass their own validators in `tests/scripts/live-pipeline.test.ts`.
 
 | Entity | Rule | Worked example | Status |

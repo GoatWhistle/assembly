@@ -14,7 +14,7 @@ import {
   setToolCatalog,
   TOOL_SECRET_HEADER,
 } from "@/tools"
-import fixture from "../../eval/fixtures/catalog-fixture.json"
+import fixture from "../../tools/eval/fixtures/catalog-fixture.json"
 
 export const SECRET = "test-tool-secret"
 export const SESSION = "api-test-session"

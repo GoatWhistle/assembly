@@ -68,9 +68,9 @@ it bites. The rules below explain choices in how the checks themselves are built
 
 | Rule | Failure it prevents | Enforced by |
 |---|---|---|
-| The mutation runner reads and writes the gate without newline translation, runs vitest with colour disabled (`NO_COLOR`, `--no-color`), reads the named test's verdict from the JSON reporter, and records its own pid in its lock | CRLF translation on Windows breaking the byte-for-byte restore; colour codes or reporter formatting hiding a test name; a stale lock blocking every later run | `scripts/checks/gate-mutation.sh`, `scripts/checks/named-test-verdict.mjs` |
+| The mutation runner reads and writes the gate without newline translation, runs vitest with colour disabled (`NO_COLOR`, `--no-color`), reads the named test's verdict from the JSON reporter, and records its own pid in its lock | CRLF translation on Windows breaking the byte-for-byte restore; colour codes or reporter formatting hiding a test name; a stale lock blocking every later run | `tools/scripts/checks/gate-mutation.sh`, `tools/scripts/checks/named-test-verdict.mjs` |
 | Checks that walk the tree are Node scripts or use shell parameter expansion, not a subprocess per file | On Windows a subprocess per file makes a check slow enough to trip the test runner's IPC timeout, which reports a failure no assertion made | Convention; no check enforces it |
-| `make touch-targets` requires every standalone interactive class, one that declares its own `display`, to reach the floor itself; pure modifiers are skipped | Passing a control that declares no height because a sibling selector clears the floor; false positives on modifiers that carry only colour | `scripts/checks/touch-targets.mjs`, with a positive control; the whole tree must stay quiet |
+| `make touch-targets` requires every standalone interactive class, one that declares its own `display`, to reach the floor itself; pure modifiers are skipped | Passing a control that declares no height because a sibling selector clears the floor; false positives on modifiers that carry only colour | `tools/scripts/checks/touch-targets.mjs`, with a positive control; the whole tree must stay quiet |
 | No coloured side stripe (`border-left` or `border-right`) as an accent on prose, with one named hairline exception | A visual rule enforced by no script returning with the next component | `tests/shared/no-side-stripe.test.ts` |
 
 A check that raises false alarms gets ignored as surely as one that never fires, so
@@ -85,14 +85,14 @@ A check that raises false alarms gets ignored as surely as one that never fires,
 
 ## What is synthesised, and how does that stay visible?
 
-The socket traffic in `eval/fixtures/` is synthesised by `scripts/build/fixtures.ts` from the
+The socket traffic in `tools/eval/fixtures/` is synthesised by `tools/scripts/build/fixtures.ts` from the
 documented message shapes: every socket fixture carries the same `recordedAt` and a
 `sessionId` of `fixture-<name>`. `make fixtures` runs the generator, which prints that the
 fixtures are synthesised and must be re-recorded before a published number depends on them.
 
 The fixtures exercise provenance matching, the validators, the pair table and the gate; they
 do not prove the shapes are what the sockets send. The recognizer figures in
-[eval/REPORT.md](../eval/REPORT.md) come from live sockets. The gate's own decision time is the
+[tools/eval/REPORT.md](../tools/eval/REPORT.md) come from live sockets. The gate's own decision time is the
 one published figure a fixture feeds, and the A/B table in the report uses assigned
 confidences; both say so there.
 

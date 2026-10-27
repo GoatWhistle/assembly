@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest"
 import { FieldName } from "@/domain"
 import { VENDOR_SESSIONS_URL, type WitnessFetch, witnessOrder } from "@/sessions"
-import sessionRecord from "../../eval/fixtures/witness/session-record-shape.json"
-import timeline from "../../eval/fixtures/witness/timeline-recorded-shape.json"
+import sessionRecord from "../../tools/eval/fixtures/witness/session-record-shape.json"
+import timeline from "../../tools/eval/fixtures/witness/timeline-recorded-shape.json"
 
 const AGENT = "agent_witness_test"
 const SESSION = "sess_b5f7793876a544baae0299c9d9fe6aad"

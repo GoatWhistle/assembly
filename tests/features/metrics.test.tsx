@@ -174,7 +174,7 @@ describe("measured figures reach the screen", () => {
 })
 
 describe("held-out discipline is stated on the measurements page", () => {
-  it("says thresholds are chosen defaults tuned on no set, as eval/REPORT.md does", () => {
+  it("says thresholds are chosen defaults tuned on no set, as tools/eval/REPORT.md does", () => {
     render(<MetricsPage />)
     expect(
       screen.getByText(/Thresholds are chosen defaults, not tuned on any set/),

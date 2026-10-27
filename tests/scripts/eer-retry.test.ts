@@ -1,6 +1,6 @@
 import { EventEmitter } from "node:events"
 import { describe, expect, it } from "vitest"
-import { type ConnectDeps, connectStreaming } from "../../scripts/eer/connect"
+import { type ConnectDeps, connectStreaming } from "../../tools/scripts/eer/connect"
 import {
   isRetryable,
   isTransportFailure,
@@ -8,7 +8,7 @@ import {
   TRANSPORT_BACKOFF_MS,
   VendorError,
   withRetry,
-} from "../../scripts/eer/retry"
+} from "../../tools/scripts/eer/retry"
 
 function connectTimeout(): Error {
   const cause = Object.assign(new Error("Connect Timeout Error"), {

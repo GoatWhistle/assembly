@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest"
 import { FieldName, policyFor } from "@/domain"
-import { reflexYesWrites } from "../../scripts/arms/shipped-policy"
-import { assignments } from "../../scripts/measure/coverage-matrix"
+import { reflexYesWrites } from "../../tools/scripts/arms/shipped-policy"
+import { assignments } from "../../tools/scripts/measure/coverage-matrix"
 
 const rows = assignments()
 const errors = rows.filter((row) => row.misheard)

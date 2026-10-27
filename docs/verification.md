@@ -10,7 +10,7 @@
 a published number yourself · **Related:** [architecture](architecture.md) ·
 [security](security.md) · [evidence](evidence.md) ·
 [design decisions](design-decisions.md) · [cost and budget](cost-and-budget.md) ·
-[eval/REPORT.md](../eval/REPORT.md)
+[tools/eval/REPORT.md](../tools/eval/REPORT.md)
 
 ---
 
@@ -61,7 +61,7 @@ in progress; wait and re-run. The script restores the file byte for byte itself.
 The remaining steps of `VERIFY_STEPS` are `lint`, `typecheck`, `test`, `smoke` (the
 synthesised fixtures replayed through the server pipeline) and `latency-budget`. File size,
 package size and the language rule are ratchets: what is already exceeded is recorded in
-`scripts/baselines/` and the counter only moves down. Tests are counted separately from
+`tools/scripts/baselines/` and the counter only moves down. Tests are counted separately from
 sources, so thorough coverage is not pushed toward fewer tests. The package limit exists
 because the file limit alone would let a long file be sliced into many small ones inside the
 same directory.
@@ -79,7 +79,7 @@ assertion that builds one is inside `src/gate/confirm.ts`, and `Order.setField` 
 nothing else. There is no `force` flag, no convenience constructor and no object-literal
 path by which "the model decided it was fine" writes a value.
 
-`make gate-invariant` ([`scripts/checks/gate-invariant.sh`](../scripts/checks/gate-invariant.sh))
+`make gate-invariant` ([`tools/scripts/checks/gate-invariant.sh`](../tools/scripts/checks/gate-invariant.sh))
 fails on each of these:
 
 | Refused | Why |
@@ -103,8 +103,8 @@ is no code path that accepts a string as proof.
 
 ### Every gate branch dies to its own test
 
-`make gate-mutation` ([`scripts/checks/gate-mutation.sh`](../scripts/checks/gate-mutation.sh))
-reads [`scripts/checks/gate-mutations.txt`](../scripts/checks/gate-mutations.txt), one line
+`make gate-mutation` ([`tools/scripts/checks/gate-mutation.sh`](../tools/scripts/checks/gate-mutation.sh))
+reads [`tools/scripts/checks/gate-mutations.txt`](../tools/scripts/checks/gate-mutations.txt), one line
 per branch: a label, the original text, the broken text and the name of the test that must
 fail. Before the first mutation it refuses to start if any original text is missing from
 `src/gate/decide.ts`, since that means an interrupted run left the gate broken or the gate
@@ -174,17 +174,17 @@ what it costs, whether degraded audio turns a name into its published partner, t
 synthesised fixture path replayed end to end, the human-voice set, a count of every paid run
 including the discarded ones, and what the paid API has cost.
 
-Fifteen blocks, no network call, no key. [`scripts/report/honest.ts`](../scripts/report/honest.ts)
+Fifteen blocks, no network call, no key. [`tools/scripts/report/honest.ts`](../tools/scripts/report/honest.ts)
 prints the count at the end of its own output, and a step that prints nothing counts as a
 failure.
 
 It does not fill in anything that needs a live socket (turn-to-turn latency, the agent's own
-timings, the sealed held-out set). Those rows read as not measured in `eval/REPORT.md`.
+timings, the sealed held-out set). Those rows read as not measured in `tools/eval/REPORT.md`.
 
 **A figure and its command are compared, not merely both present.**
 [`tests/scripts/honest-report-agreement.test.ts`](../tests/scripts/honest-report-agreement.test.ts)
 runs each anchored step's real command and requires its printed figures, the measured values
-and not only the set size, to appear in `eval/REPORT.md`. The figures in the project README,
+and not only the set size, to appear in `tools/eval/REPORT.md`. The figures in the project README,
 the slides and these docs are checked the same way by
 [`tests/scripts/public-figures-agreement.test.ts`](../tests/scripts/public-figures-agreement.test.ts).
 
@@ -192,7 +192,7 @@ the slides and these docs are checked the same way by
 
 | Command | Opens a paid socket | What it runs against |
 |---|---|---|
-| `make test` | **no** | Socket traffic in `eval/fixtures/`, **synthesised** by `make fixtures` against the documented message shapes, not captured from a live run |
+| `make test` | **no** | Socket traffic in `tools/eval/fixtures/`, **synthesised** by `make fixtures` against the documented message shapes, not captured from a live run |
 | `make verify` | **no** | Every step is local; `VERIFY_STEPS` in the `Makefile` is the list |
 | `make honest` | **no** | Recorded corpora and the real validator and gate |
 | `make e2e` | **no** | Playwright with a fake microphone, against `E2E_BASE_URL` (a preview deployment) or, without it, a local `npm run dev` |
@@ -200,8 +200,8 @@ the slides and these docs are checked the same way by
 | `make spend` | **no** | Reads the spend ledger and reconciles it against the run registry; see below |
 | `make measure` | **no** | The gate's own decision latency over fixtures; its live path is **not implemented** |
 | `make eval` | **yes** | The development set, 40 sessions at 24-second spacing |
-| `make eval-heldout` | **yes** | The sealed held-out set, opened once against the rule in [`eval/heldout-preregistration.md`](../eval/heldout-preregistration.md) |
-| `make eval-live` | **yes** | The human voice set from [`eval/live/voice-set.md`](../eval/live/voice-set.md) |
+| `make eval-heldout` | **yes** | The sealed held-out set, opened once against the rule in [`tools/eval/heldout-preregistration.md`](../tools/eval/heldout-preregistration.md) |
+| `make eval-live` | **yes** | The human voice set from [`tools/eval/live/voice-set.md`](../tools/eval/live/voice-set.md) |
 | `make live-smoke` | **yes** | Six scripted calls through both live sockets |
 
 `make doctor` checks that the reference agent exists and matches the source and that every
@@ -256,10 +256,10 @@ LIVE_SMOKE_CONFIRM_PAID=1 LIVE_SMOKE_URL=https://<deployment> \
 `make live-smoke` runs the same config with both projects.
 
 **Every paid run is recorded, including the failed ones.** Each run is appended to
-[`eval/live/runs.json`](../eval/live/runs.json) with its outcome, the reason, the socket
+[`tools/eval/live/runs.json`](../tools/eval/live/runs.json) with its outcome, the reason, the socket
 seconds, the cost at the recorded rate, the session ids and its boundaries. `make live-runs`
 counts them from the artefacts, and `make spend` derives the total from
-`eval/spend-ledger.json` at the rates on a named date and reconciles every registry run
+`tools/eval/spend-ledger.json` at the rates on a named date and reconciles every registry run
 against the ledger (`tests/eval/spend-registry-agreement.test.ts`). Rates come from one table
 through `ratePerHourFor`; `tests/eval/spend-ledger.test.ts` refuses an hourly-rate literal in
 the paid STT probe.

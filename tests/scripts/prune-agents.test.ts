@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { listedAgents, orphanedSessionAgents } from "../../scripts/report/prune-agents"
+import { listedAgents, orphanedSessionAgents } from "../../tools/scripts/report/prune-agents"
 
 const NOW = Date.parse("2026-09-25T12:00:00Z")
 

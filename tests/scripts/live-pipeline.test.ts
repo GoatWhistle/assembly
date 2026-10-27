@@ -4,18 +4,18 @@ import { join } from "node:path"
 import { describe, expect, it } from "vitest"
 import { VerdictOutcome } from "@/domain"
 import { validateDea, validateNpi } from "@/validators"
-import { buildLiveManifest } from "../../scripts/build/live-set"
+import { buildLiveManifest } from "../../tools/scripts/build/live-set"
 import {
   identifierPauses,
   keytermsAblation,
   type LiveResult,
   summariseLive,
-} from "../../scripts/live/live-analysis"
-import { appendRunRecord, readRegistry, runRecordOf } from "../../scripts/live/run-registry"
-import { itemFor, parseVoiceSet, VOICE_SET_DOC } from "../../scripts/live/voice-set"
-import { acceptanceArtefact } from "../../scripts/live-receipt"
-import { PAID_CONFIRMATION_FLAG, refusalReason } from "../../scripts/measure/measure-live"
-import { liveReport } from "../../scripts/report/live-report"
+} from "../../tools/scripts/live/live-analysis"
+import { appendRunRecord, readRegistry, runRecordOf } from "../../tools/scripts/live/run-registry"
+import { itemFor, parseVoiceSet, VOICE_SET_DOC } from "../../tools/scripts/live/voice-set"
+import { acceptanceArtefact } from "../../tools/scripts/live-receipt"
+import { PAID_CONFIRMATION_FLAG, refusalReason } from "../../tools/scripts/measure/measure-live"
+import { liveReport } from "../../tools/scripts/report/live-report"
 
 const items = parseVoiceSet(readFileSync(VOICE_SET_DOC, "utf8"))
 
@@ -171,7 +171,7 @@ describe("E1 and E2: paid runs are refused without approval and recorded when th
     const registry = join(dir, "runs.json")
     const ledger = join(dir, "ledger.json")
     writeFileSync(registry, JSON.stringify({ runs: [] }), "utf8")
-    copyFileSync("eval/spend-ledger.json", ledger)
+    copyFileSync("tools/eval/spend-ledger.json", ledger)
     const before = JSON.parse(readFileSync(ledger, "utf8")).runs.length
     for (const [index, outcome] of (
       ["completed", "failed", "inconclusive"] as const
@@ -179,7 +179,7 @@ describe("E1 and E2: paid runs are refused without approval and recorded when th
       appendRunRecord(
         {
           kind: "acceptance_call",
-          command: "npx tsx scripts/live-receipt.ts",
+          command: "npx tsx tools/scripts/live-receipt.ts",
           outcome,
           reason: outcome,
           socketSeconds: 60,

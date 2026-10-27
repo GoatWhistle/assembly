@@ -138,7 +138,7 @@ export default function MetricsPage() {
                 <Method
                   command={HELD_OUT_STRATA_SCRIPT}
                   n={`${HELD_OUT_STRATUM_SIZE} each`}
-                  set="three rarity strata of eval/heldout"
+                  set="three rarity strata of tools/eval/heldout"
                 />
               </p>
             </div>

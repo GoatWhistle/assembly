@@ -4,7 +4,7 @@ import { join } from "node:path"
 import { afterEach, describe, expect, it } from "vitest"
 
 const ROOT = process.cwd()
-const SCRIPT = "scripts/checks/gate-invariant.sh"
+const SCRIPT = "tools/scripts/checks/gate-invariant.sh"
 const PROBE_DIR = join(ROOT, "src", "features", "invariant-probe")
 
 function runCheck(): { code: number; output: string } {

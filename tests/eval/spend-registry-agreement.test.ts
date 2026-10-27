@@ -4,8 +4,8 @@ import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { afterEach, describe, expect, it } from "vitest"
 import { parseLedger } from "@/domain"
-import { appendRunRecord, isRunRecord, readRegistry } from "../../scripts/live/run-registry"
-import { reconcileRegistry, reconciles } from "../../scripts/report/spend-reconcile"
+import { appendRunRecord, isRunRecord, readRegistry } from "../../tools/scripts/live/run-registry"
+import { reconcileRegistry, reconciles } from "../../tools/scripts/report/spend-reconcile"
 
 const dirs: string[] = []
 
@@ -21,14 +21,14 @@ function scratch(): { registry: string; ledger: string } {
   const registry = join(dir, "runs.json")
   const ledger = join(dir, "ledger.json")
   writeFileSync(registry, JSON.stringify({ runs: [] }), "utf8")
-  copyFileSync("eval/spend-ledger.json", ledger)
+  copyFileSync("tools/eval/spend-ledger.json", ledger)
   return { registry, ledger }
 }
 
 function record(at: string, socketSeconds = 120) {
   return {
     kind: "acceptance_call" as const,
-    command: "npx tsx scripts/live-receipt.ts",
+    command: "npx tsx tools/scripts/live-receipt.ts",
     outcome: "completed" as const,
     reason: "one call placed an order",
     socketSeconds,
@@ -84,7 +84,7 @@ describe("AU7: make spend reads the same runs the live registry records", () => 
   })
 
   it("the spend report prints the reconciliation against the committed registry", () => {
-    const output = execFileSync("npx", ["tsx", "scripts/report/spend-report.ts"], {
+    const output = execFileSync("npx", ["tsx", "tools/scripts/report/spend-report.ts"], {
       encoding: "utf8",
       stdio: "pipe",
       shell: true,

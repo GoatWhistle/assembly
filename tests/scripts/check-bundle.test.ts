@@ -4,7 +4,7 @@ import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { describe, expect, it } from "vitest"
 
-const SCRIPT = "scripts/checks/check-bundle.sh"
+const SCRIPT = "tools/scripts/checks/check-bundle.sh"
 
 function run(dir: string, env: Record<string, string> = {}): { ok: boolean; output: string } {
   try {

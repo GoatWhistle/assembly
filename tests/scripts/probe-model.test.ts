@@ -4,7 +4,7 @@ import {
   modelVerdict,
   PROBE_CANDIDATE_MODEL,
   probeSocketUrl,
-} from "../../scripts/report/probe-model"
+} from "../../tools/scripts/report/probe-model"
 
 describe("T2: the model probe is prepared, parameterised and never run by a test", () => {
   it("puts the requested model on the streaming URL", () => {

@@ -11,7 +11,7 @@ import {
   searchDrugs,
 } from "@/catalog"
 import { CatalogUnavailableError } from "@/domain"
-import fixture from "../../eval/fixtures/catalog-fixture.json"
+import fixture from "../../tools/eval/fixtures/catalog-fixture.json"
 
 const catalog = catalogFromFile(fixture)
 

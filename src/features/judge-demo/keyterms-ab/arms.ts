@@ -48,7 +48,7 @@ export const WHY_NO_NUMBER =
   "There is no measured figure for the biased arm. If it is ever measured, it is a one-off diagnostic on the human voice set, never a product setting, and make keyterms-purity still refuses it in the product. Until then the honest cell here is an absence rather than a number nobody produced."
 
 export const MEASURED_ARM_NOTE =
-  "The shipped arm is the one the recorded sets were measured on: every result file under eval/ carries keyterms 0 for the recognizer socket, and the identity context that does go in is sampled below."
+  "The shipped arm is the one the recorded sets were measured on: every result file under tools/eval/ carries keyterms 0 for the recognizer socket, and the identity context that does go in is sampled below."
 
 export const NO_MICROPHONE_NOTE =
   "Both columns are read off the built lists and the curated pair table on this page. Nothing here opens a socket or sends audio, so the comparison costs no credit and needs no microphone."

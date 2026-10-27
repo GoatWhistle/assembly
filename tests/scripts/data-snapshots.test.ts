@@ -6,7 +6,7 @@ import {
   sealSnapshot,
   snapshotVerdict,
   snapshotVerdictOf,
-} from "../../scripts/build/snapshot"
+} from "../../tools/scripts/build/snapshot"
 
 const SOURCE = {
   builtAt: "2026-09-25T00:00:00.000Z",
@@ -68,7 +68,7 @@ const DOWNLOAD_MARKERS: readonly string[] = [
   "ndctext.zip",
   "ConfusedDrugNames",
   "node:child_process",
-  "scripts/build/",
+  "tools/scripts/build/",
 ]
 
 function sourceFiles(dir: string): string[] {

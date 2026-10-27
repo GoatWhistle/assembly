@@ -2,8 +2,8 @@ import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { afterEach, describe, expect, it } from "vitest"
-import type { ManifestItem, TranscriptResult } from "../../scripts/eer/transcribe"
-import { type SweepDeps, transcribeAll } from "../../scripts/measure/measure-eer"
+import type { ManifestItem, TranscriptResult } from "../../tools/scripts/eer/transcribe"
+import { type SweepDeps, transcribeAll } from "../../tools/scripts/measure/measure-eer"
 
 function connectTimeout(): Error {
   const cause = Object.assign(new Error("Connect Timeout Error"), {
@@ -21,7 +21,7 @@ describe("a sweep resumes from its partial file and records exhausted items inst
 
   function item(name: string): ManifestItem {
     return {
-      file: `eval/stress/audio/phone/${name}.wav`,
+      file: `tools/eval/stress/audio/phone/${name}.wav`,
       spoken: name,
       carrier: `The drug name is ${name}.`,
       voice: "v",

@@ -2,9 +2,9 @@ import { execFile } from "node:child_process"
 import { readFileSync } from "node:fs"
 import { promisify } from "node:util"
 import { describe, expect, it } from "vitest"
-import { STEPS } from "../../scripts/report/honest"
+import { STEPS } from "../../tools/scripts/report/honest"
 
-const REPORT = readFileSync("eval/REPORT.md", "utf8")
+const REPORT = readFileSync("tools/eval/REPORT.md", "utf8")
 
 const run = promisify(execFile)
 
@@ -121,23 +121,23 @@ const ANCHORS: readonly Anchor[] = [
   },
 ]
 
-describe("what make honest prints today agrees with what eval/REPORT.md claims", () => {
+describe("what make honest prints today agrees with what tools/eval/REPORT.md claims", () => {
   it("names every step this test is meant to cross-check, so an added step cannot go unguarded silently", () => {
     const titles = new Set(STEPS.map((step) => step.title))
     for (const anchor of ANCHORS) {
       expect(
         titles.has(anchor.step),
-        `${anchor.step} is anchored here but scripts/report/honest.ts no longer has a step by that title; the anchor list has drifted from the source it is meant to guard`,
+        `${anchor.step} is anchored here but tools/scripts/report/honest.ts no longer has a step by that title; the anchor list has drifted from the source it is meant to guard`,
       ).toBe(true)
     }
   })
 
   for (const anchor of ANCHORS) {
-    it(`"${anchor.step}" prints figures that still appear in eval/REPORT.md`, async () => {
+    it(`"${anchor.step}" prints figures that still appear in tools/eval/REPORT.md`, async () => {
       const step = STEPS.find((candidate) => candidate.title === anchor.step)
       expect(
         step,
-        `no step titled "${anchor.step}" exists in scripts/report/honest.ts`,
+        `no step titled "${anchor.step}" exists in tools/scripts/report/honest.ts`,
       ).toBeDefined()
       if (step === undefined) {
         return
@@ -150,7 +150,7 @@ describe("what make honest prints today agrees with what eval/REPORT.md claims",
         ).toContain(figure)
         expect(
           REPORT,
-          `eval/REPORT.md no longer contains "${figure}", which "${step.command}" prints right now; either the report went stale or the corpus moved without the text being regenerated`,
+          `tools/eval/REPORT.md no longer contains "${figure}", which "${step.command}" prints right now; either the report went stale or the corpus moved without the text being regenerated`,
         ).toContain(figure)
       }
     })

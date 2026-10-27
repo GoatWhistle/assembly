@@ -1,10 +1,10 @@
 import { existsSync, readFileSync } from "node:fs"
 import { describe, expect, it } from "vitest"
 
-const PREREGISTRATION = "eval/heldout-preregistration.md"
-const TERMS = "eval/heldout/terms.json"
-const SEAL = "eval/heldout.sha256"
-const RESULT = "eval/heldout/result-plain.json"
+const PREREGISTRATION = "tools/eval/heldout-preregistration.md"
+const TERMS = "tools/eval/heldout/terms.json"
+const SEAL = "tools/eval/heldout.sha256"
+const RESULT = "tools/eval/heldout/result-plain.json"
 
 type Terms = {
   readonly seed: number
@@ -62,7 +62,7 @@ describe("the held-out set keeps the discipline that makes its number mean anyth
       return
     }
     const heldout = new Set(file.terms.map((term) => term.trim().toLowerCase()))
-    const others = ["eval/control/terms.json", "eval/dev/manifest.json"]
+    const others = ["tools/eval/control/terms.json", "tools/eval/dev/manifest.json"]
     for (const path of others) {
       if (!existsSync(path)) {
         continue

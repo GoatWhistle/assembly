@@ -5,7 +5,7 @@ import {
   liveRecordingSchema,
   smokeLiveRecording,
   smokeLiveRecordings,
-} from "../../scripts/fixtures/live-recording"
+} from "../../tools/scripts/fixtures/live-recording"
 
 function recording(overrides: Record<string, unknown> = {}): {
   frames: unknown[]

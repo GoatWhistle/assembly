@@ -6,7 +6,7 @@
     "useIgnoreFile": true
   },
   "files": {
-    "includes": ["src/**", "app/**", "tests/**", "scripts/**"]
+    "includes": ["src/**", "app/**", "tests/**", "tools/scripts/**"]
   },
   "formatter": {
     "enabled": true,
@@ -102,7 +102,7 @@
       }
     },
     {
-      "includes": ["scripts/**"],
+      "includes": ["tools/scripts/**"],
       "linter": {
         "rules": {
           "suspicious": {
@@ -116,7 +116,7 @@
         "app/api/**",
         "src/realtime/protocol.ts",
         "src/agent/**",
-        "scripts/**",
+        "tools/scripts/**",
         "tests/api/**",
         "tests/agent/**",
         "tests/realtime/**"

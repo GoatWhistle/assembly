@@ -2,7 +2,7 @@ import { execFileSync } from "node:child_process"
 import { readFileSync } from "node:fs"
 import { describe, expect, it } from "vitest"
 
-const DOCTOR = "scripts/report/doctor.ts"
+const DOCTOR = "tools/scripts/report/doctor.ts"
 
 function runDoctor(env: Record<string, string>): { code: number; output: string } {
   try {
@@ -72,13 +72,13 @@ describe("the doctor entry point fails loudly instead of printing a reassuring s
   )
 
   it("opens no paid socket, proven over the source of both doctor files rather than over its printed promise", () => {
-    const sources = [DOCTOR, "scripts/report/doctor-checks.ts"].map((path) =>
+    const sources = [DOCTOR, "tools/scripts/report/doctor-checks.ts"].map((path) =>
       readFileSync(path, "utf8"),
     )
     for (const [index, source] of sources.entries()) {
       expect(
         source,
-        `${index === 0 ? DOCTOR : "scripts/report/doctor-checks.ts"} must not construct a WebSocket: a liveness probe that opened one would bill at 5.10 per hour while claiming to be free`,
+        `${index === 0 ? DOCTOR : "tools/scripts/report/doctor-checks.ts"} must not construct a WebSocket: a liveness probe that opened one would bill at 5.10 per hour while claiming to be free`,
       ).not.toMatch(/WebSocket\s*\(|wss:\/\//)
     }
   })

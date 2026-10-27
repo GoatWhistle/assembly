@@ -74,7 +74,7 @@ function record(input: {
     process.execPath,
     [
       "node_modules/tsx/dist/cli.mjs",
-      "scripts/live-receipt.ts",
+      "tools/scripts/live-receipt.ts",
       "--kind",
       "live_smoke",
       "--command",

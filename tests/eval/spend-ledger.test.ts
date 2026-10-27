@@ -12,15 +12,15 @@ import {
   ratePerHourFor,
   totalSpend,
 } from "@/domain"
-import { appendPaidRun, paidRunOf } from "../../scripts/report/record-spend"
+import { appendPaidRun, paidRunOf } from "../../tools/scripts/report/record-spend"
 
-const LEDGER_PATH = "eval/spend-ledger.json"
+const LEDGER_PATH = "tools/eval/spend-ledger.json"
 
 function run(overrides: Partial<PaidRun> = {}): PaidRun {
   return {
     runId: "r1",
     at: "2026-09-17T00:00:00.000Z",
-    command: "scripts/report/probe-stt.ts",
+    command: "tools/scripts/report/probe-stt.ts",
     sockets: ["stt"],
     openSeconds: 3600,
     outcome: "completed",
@@ -32,7 +32,7 @@ function runReport(): { code: number; output: string } {
   try {
     return {
       code: 0,
-      output: execFileSync("npx", ["tsx", "scripts/report/spend-report.ts"], {
+      output: execFileSync("npx", ["tsx", "tools/scripts/report/spend-report.ts"], {
         encoding: "utf8",
         stdio: "pipe",
         shell: true,
@@ -149,7 +149,7 @@ describe("the spend figure is derived from recorded runs, never from a remembere
 
   it("derives a run's duration from recorded open and close timestamps rather than from a typed-in number", () => {
     const recorded = paidRunOf({
-      command: "scripts/report/probe-stt.ts",
+      command: "tools/scripts/report/probe-stt.ts",
       sockets: ["stt"],
       openedAtMs: 1_000_000,
       closedAtMs: 1_006_000,
@@ -179,7 +179,7 @@ describe("the spend figure is derived from recorded runs, never from a remembere
     expect(
       result.output,
       "every figure must carry the command that produced it, per the project's own rule",
-    ).toContain("npx tsx scripts/report/spend-report.ts")
+    ).toContain("npx tsx tools/scripts/report/spend-report.ts")
     expect(result.output).toContain("assemblyai.com/pricing")
   })
 
@@ -212,7 +212,7 @@ describe("the spend figure is derived from recorded runs, never from a remembere
   })
 
   it("leaves no hardcoded hourly rate in the paid probe, so one price table governs every figure", () => {
-    const source = readFileSync("scripts/report/probe-stt.ts", "utf8")
+    const source = readFileSync("tools/scripts/report/probe-stt.ts", "utf8")
     expect(
       source,
       "a literal 0.45 in a script is a second price list that drifts from the checked one, which is exactly how a project ends up publishing two different numbers",

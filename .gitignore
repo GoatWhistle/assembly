@@ -15,7 +15,7 @@ playwright-report/
 
 data/*.csv
 data/*.zip
-eval/*/audio/
+tools/eval/*/audio/
 
 screenshots/
 artefacts/

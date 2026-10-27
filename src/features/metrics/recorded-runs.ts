@@ -1,6 +1,6 @@
-import control from "../../../eval/control/result-plain.json"
-import dev from "../../../eval/dev/result-plain.json"
-import native16 from "../../../eval/native16/result-plain.json"
+import control from "../../../tools/eval/control/result-plain.json"
+import dev from "../../../tools/eval/dev/result-plain.json"
+import native16 from "../../../tools/eval/native16/result-plain.json"
 
 export type Scored = {
   readonly spoken: string

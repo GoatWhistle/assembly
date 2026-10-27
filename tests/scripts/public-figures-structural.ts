@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs"
 import { LASA_PAIRS } from "@/lasa"
-import { STEPS } from "../../scripts/report/honest"
+import { STEPS } from "../../tools/scripts/report/honest"
 import {
   type Anchor,
   capitalised,
@@ -17,14 +17,14 @@ const LIMITATIONS: PublicDocument = "docs/limitations.md"
 const SECURITY: PublicDocument = "docs/security.md"
 const VERIFICATION: PublicDocument = "docs/verification.md"
 
-const MUTATIONS = "scripts/checks/gate-mutations.txt"
+const MUTATIONS = "tools/scripts/checks/gate-mutations.txt"
 const MAKEFILE = "Makefile"
 const PAIRS = "src/lasa/pairs.ts"
-const HONEST = "scripts/report/honest.ts"
+const HONEST = "tools/scripts/report/honest.ts"
 const SET_NAMES: Readonly<Record<string, string>> = {
-  "eval/dev": "development",
-  "eval/control": "control",
-  "eval/heldout": "sealed held-out",
+  "tools/eval/dev": "development",
+  "tools/eval/control": "control",
+  "tools/eval/heldout": "sealed held-out",
 }
 
 type ListedTest = { readonly name: string; readonly file: string }
@@ -140,13 +140,13 @@ export const STRUCTURAL_ANCHORS: readonly Anchor[] = [
   {
     document: VERIFICATION,
     locate: /No file over (\d+) lines/,
-    source: "scripts/checks/file-length.sh",
+    source: "tools/scripts/checks/file-length.sh",
     reproduce: (evidence) => String(integer(evidence, /^LIMIT=(\d+)$/m)),
   },
   {
     document: VERIFICATION,
     locate: /No directory over (\d+) sources \/ (\d+) tests/,
-    source: "scripts/checks/package-size.sh",
+    source: "tools/scripts/checks/package-size.sh",
     reproduce: (evidence) =>
       `${integer(evidence, /^SRC_LIMIT=(\d+)$/m)} | ${integer(evidence, /^TEST_LIMIT=(\d+)$/m)}`,
   },

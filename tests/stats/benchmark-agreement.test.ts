@@ -3,14 +3,14 @@ import { GET as metricsRoute } from "@app/api/metrics/route"
 import { describe, expect, it } from "vitest"
 import { createMemoryStore, installSessionStore } from "@/sessions"
 import { BENCHMARK_ROWS, BUSINESS_READING } from "@/stats"
-import { STEPS } from "../../scripts/report/honest"
+import { STEPS } from "../../tools/scripts/report/honest"
 
-const REPORT = readFileSync("eval/REPORT.md", "utf8")
+const REPORT = readFileSync("tools/eval/REPORT.md", "utf8")
 
 const HONEST_COMMANDS = new Set(STEPS.map((step) => step.command))
 
 describe("U9: every figure on /metrics is anchored to the report and to a re-runnable command", () => {
-  it("shows every measured value exactly as eval/REPORT.md publishes it", () => {
+  it("shows every measured value exactly as tools/eval/REPORT.md publishes it", () => {
     for (const row of BENCHMARK_ROWS.filter((entry) => entry.value !== null)) {
       expect(REPORT.includes(String(row.value)), `${row.figure}: ${row.value}`).toBe(true)
     }

@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest"
 import { FieldName } from "@/domain"
 import { policyFor } from "@/domain/policy"
 
-const RESULT = "eval/dev/result-plain.json"
+const RESULT = "tools/eval/dev/result-plain.json"
 
 type Scored = {
   readonly spoken: string
@@ -31,8 +31,8 @@ describe("the recorded recognizer run", () => {
     const result = load()
     if (result === null) {
       expect(
-        readFileSync("eval/REPORT.md", "utf8").includes("| development, LASA terms | **40**"),
-        "eval/REPORT.md cites a recorded run that no longer exists on disk; rerun make eval or drop the row",
+        readFileSync("tools/eval/REPORT.md", "utf8").includes("| development, LASA terms | **40**"),
+        "tools/eval/REPORT.md cites a recorded run that no longer exists on disk; rerun make eval or drop the row",
       ).toBe(false)
       return
     }

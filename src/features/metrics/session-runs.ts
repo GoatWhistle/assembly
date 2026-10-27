@@ -1,12 +1,12 @@
-import control from "../../../eval/control/result-plain.json"
-import dev from "../../../eval/dev/result-plain.json"
-import heldout from "../../../eval/heldout/result-plain.json"
-import native16 from "../../../eval/native16/result-plain.json"
-import stress from "../../../eval/stress/result-plain.json"
-import units from "../../../eval/units/result-plain.json"
+import control from "../../../tools/eval/control/result-plain.json"
+import dev from "../../../tools/eval/dev/result-plain.json"
+import heldout from "../../../tools/eval/heldout/result-plain.json"
+import native16 from "../../../tools/eval/native16/result-plain.json"
+import stress from "../../../tools/eval/stress/result-plain.json"
+import units from "../../../tools/eval/units/result-plain.json"
 
-export const LIVE_RUN_COUNT_COMMAND = "npx tsx scripts/report/live-run-count.ts"
-export const STRESS_COMMAND = "npx tsx scripts/measure/analyse-stress.ts"
+export const LIVE_RUN_COUNT_COMMAND = "npx tsx tools/scripts/report/live-run-count.ts"
+export const STRESS_COMMAND = "npx tsx tools/scripts/measure/analyse-stress.ts"
 
 type Entry = { readonly closeCode?: number }
 
@@ -54,23 +54,23 @@ function fromReport(id: string, closes: readonly (readonly [number, number])[]):
 }
 
 export const REPORT_ACCOUNT_RUNS: readonly SessionRun[] = Object.freeze([
-  fromReport("eval/dev at 1 s spacing, overwritten", [
+  fromReport("tools/eval/dev at 1 s spacing, overwritten", [
     [1000, 19],
     [1008, 21],
   ]),
-  fromReport("eval/dev, four files re-run", [[1000, 4]]),
+  fromReport("tools/eval/dev, four files re-run", [[1000, 4]]),
 ])
 
 const BEFORE_LEDGER: readonly SessionRun[] = Object.freeze([
-  fromFile("eval/dev/result-plain.json", dev as ResultFile),
-  fromFile("eval/control/result-plain.json", control as ResultFile),
-  fromFile("eval/native16/result-plain.json", native16 as ResultFile),
-  fromFile("eval/units/result-plain.json", units as ResultFile),
-  fromFile("eval/heldout/result-plain.json", heldout as ResultFile),
+  fromFile("tools/eval/dev/result-plain.json", dev as ResultFile),
+  fromFile("tools/eval/control/result-plain.json", control as ResultFile),
+  fromFile("tools/eval/native16/result-plain.json", native16 as ResultFile),
+  fromFile("tools/eval/units/result-plain.json", units as ResultFile),
+  fromFile("tools/eval/heldout/result-plain.json", heldout as ResultFile),
   ...REPORT_ACCOUNT_RUNS,
 ])
 
-const STRESS_RUN: SessionRun = fromFile("eval/stress/result-plain.json", stress as ResultFile)
+const STRESS_RUN: SessionRun = fromFile("tools/eval/stress/result-plain.json", stress as ResultFile)
 
 export function beforeLedgerRuns(): readonly SessionRun[] {
   return BEFORE_LEDGER

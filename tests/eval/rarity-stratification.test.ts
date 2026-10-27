@@ -1,6 +1,6 @@
 import { existsSync, readFileSync } from "node:fs"
 import { describe, expect, it } from "vitest"
-import { threeStratumRows } from "../../scripts/measure/analyse-rarity"
+import { threeStratumRows } from "../../tools/scripts/measure/analyse-rarity"
 
 type Scored = {
   readonly spoken: string
@@ -9,7 +9,7 @@ type Scored = {
 }
 type Result = { readonly scored: readonly Scored[] }
 
-const HELDOUT_RESULT = "eval/heldout/result-plain.json"
+const HELDOUT_RESULT = "tools/eval/heldout/result-plain.json"
 
 function heldoutScored(): readonly Scored[] | null {
   if (!existsSync(HELDOUT_RESULT)) {
@@ -19,7 +19,7 @@ function heldoutScored(): readonly Scored[] | null {
 }
 
 describe("the pre-registered three-stratum table has a command that reproduces it", () => {
-  it("reproduces the exact rare/mid/common figures eval/REPORT.md publishes", () => {
+  it("reproduces the exact rare/mid/common figures tools/eval/REPORT.md publishes", () => {
     const scored = heldoutScored()
     if (scored === null) {
       return
@@ -27,7 +27,7 @@ describe("the pre-registered three-stratum table has a command that reproduces i
     const rows = threeStratumRows(scored)
     expect(
       rows.map((r) => [r.n, r.errors, r.interval.low, r.interval.high]),
-      "the held-out run in eval/REPORT.md reports 20/6, 20/6, 20/4 for rare, mid, common; a stale copy would drift from this the next time the set is scored",
+      "the held-out run in tools/eval/REPORT.md reports 20/6, 20/6, 20/4 for rare, mid, common; a stale copy would drift from this the next time the set is scored",
     ).toEqual([
       [20, 6, expect.closeTo(0.145, 2), expect.closeTo(0.519, 2)],
       [20, 6, expect.closeTo(0.145, 2), expect.closeTo(0.519, 2)],
@@ -35,7 +35,7 @@ describe("the pre-registered three-stratum table has a command that reproduces i
     ])
   })
 
-  it("orders items rare, mid, common by position, matching how scripts/build/heldout-set.ts draws them", () => {
+  it("orders items rare, mid, common by position, matching how tools/scripts/build/heldout-set.ts draws them", () => {
     const scored = heldoutScored()
     if (scored === null) {
       return

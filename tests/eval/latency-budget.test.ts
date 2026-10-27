@@ -10,7 +10,7 @@ import {
   type LatencyMetric,
   withinBudget,
 } from "@/domain"
-import { allExceedances, samplesFor } from "../../scripts/measure/latency-budget"
+import { allExceedances, samplesFor } from "../../tools/scripts/measure/latency-budget"
 
 const METRICS = Object.keys(LATENCY_BUDGET_MS) as readonly LatencyMetric[]
 
@@ -96,7 +96,7 @@ describe("a latency budget lives in config as a number and exceedances are count
     const breached = allExceedances().filter(breachesTheBuild)
     expect(
       breached.map((entry) => `${entry.metric}: ${entry.overBudget} of ${entry.observations}`),
-      "a gating budget exceeded on the committed data means either the recognizer regressed or the budget is wrong, and either way the figure published in eval/REPORT.md no longer holds",
+      "a gating budget exceeded on the committed data means either the recognizer regressed or the budget is wrong, and either way the figure published in tools/eval/REPORT.md no longer holds",
     ).toEqual([])
   })
 

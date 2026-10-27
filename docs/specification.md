@@ -51,6 +51,7 @@ repository.
 ### The types, from a spoken word to a written field
 
 ```mermaid
+%%{init: {"theme":"base","themeVariables":{"primaryColor":"#ffffff","primaryTextColor":"#08080c","primaryBorderColor":"#5c48db","secondaryColor":"#ececf1","tertiaryColor":"#f4f4f8","lineColor":"#55555e","textColor":"#08080c","noteBkgColor":"#ececf1","noteTextColor":"#34343b","actorBkg":"#ffffff","actorBorder":"#5c48db","fontFamily":"Manrope"}}}%%
 flowchart LR
   W["WordSpan<br/>text, startMs, endMs,<br/>confidence, speaker"] --> P["Provenance<br/>words, turnOrder,<br/>minConfidence, meanConfidence,<br/>transcriptSlice, spokenText"]
   P --> C["FieldCandidate<br/>field, rawValue, normalizedValue,<br/>verdict, lasa, attempt"]
@@ -258,6 +259,7 @@ function. It imports only `@/domain`, `@/lasa` and its own sentence builders, an
 the first branch that applies.
 
 ```mermaid
+%%{init: {"theme":"base","themeVariables":{"primaryColor":"#ffffff","primaryTextColor":"#08080c","primaryBorderColor":"#5c48db","secondaryColor":"#ececf1","tertiaryColor":"#f4f4f8","lineColor":"#55555e","textColor":"#08080c","noteBkgColor":"#ececf1","noteTextColor":"#34343b","actorBkg":"#ffffff","actorBorder":"#5c48db","fontFamily":"Manrope"}}}%%
 flowchart TD
   S(["decide(candidate, policy)"]) --> A{"attempt at or over<br/>the escalation limit?"}
   A -->|critical field| X1["escalate_human<br/>X_ESCALATE_AFTER_THIRD_FAILURE"]

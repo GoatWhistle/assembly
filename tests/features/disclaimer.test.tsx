@@ -18,7 +18,6 @@ const PAGES = [
   "src/shared/ui/navigation/docs-shell/index.tsx",
   "src/features/not-found/index.tsx",
   "src/features/receipt/order-page/index.tsx",
-  "app/(pages)/deck/page.tsx",
 ]
 
 function copiesOf(text: string): number {

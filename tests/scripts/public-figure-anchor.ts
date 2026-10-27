@@ -1,17 +1,6 @@
-import { readdirSync } from "node:fs"
-export type PublicDocument = "README.md" | `src/features/deck/${string}` | `docs/${string}.md`
+export type PublicDocument = "README.md" | `docs/${string}.md`
 
-const DECK_ROOT = "src/features/deck"
-
-export const DECK_SOURCES: readonly PublicDocument[] = readdirSync(DECK_ROOT, {
-  recursive: true,
-  encoding: "utf8",
-})
-  .filter((file) => file.endsWith(".ts") || file.endsWith(".tsx"))
-  .map((file): PublicDocument => `${DECK_ROOT}/${file.replaceAll("\\", "/")}`)
-  .sort()
-
-export const PUBLIC_DOCUMENTS: readonly PublicDocument[] = ["README.md", ...DECK_SOURCES]
+export const PUBLIC_DOCUMENTS: readonly PublicDocument[] = ["README.md"]
 
 export type Anchor = {
   readonly document: PublicDocument

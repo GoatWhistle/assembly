@@ -6,8 +6,7 @@
 > recognizer confidence 1.00. These pages explain what the product does, how it is built,
 > how each claim is known, and what it cannot prove.
 
-**Start here if** you are judging the submission: [for judges](for-judges.md) is a two-minute
-route through the live product, and every page below is one link from it.
+The project overview is the [README](../README.md).
 
 ---
 
@@ -15,7 +14,6 @@ route through the live product, and every page below is one link from it.
 
 | Page | What it answers |
 |---|---|
-| [For judges](for-judges.md) | Every route of the deployment, a two-minute walk-through, the attack console, what to try with a microphone, and where each judging criterion is answered |
 | [Product](product.md) | The problem, why pharmacy, what happens in a call, what has and has not been shown, who would pay, what is new, the risks |
 
 ## How is it built?
@@ -34,7 +32,7 @@ route through the live product, and every page below is one link from it.
 |---|---|
 | [Evidence](evidence.md) | Every claim graded from measured to false, with the command and set size behind each measured one and what that set cannot show |
 | [Evaluation report](../eval/REPORT.md) | Every measured figure beside its command, set size and interval: recognizer errors, what the gate asks and catches, checksums, latency, live runs, spend |
-| [Verification](verification.md) | What `make verify` and CI run, gate mutation testing, positive controls, figures reproduced offline by `make honest`, which commands bill, the live smoke harness |
+| [Verification](verification.md) | What `make verify` runs, gate mutation testing, positive controls, figures reproduced offline by `make honest`, which commands bill, the live smoke harness |
 | [Human voice set](../eval/live/voice-set.md) | The recording script for the first human-spoken evaluation set and what each line tests; no recording exists yet |
 | [Sources](sources.md) | Every outside rule and figure, quoted verbatim with its link, including the evidence that cuts against the product |
 
@@ -45,9 +43,8 @@ route through the live product, and every page below is one link from it.
 | [Limitations](limitations.md) | Everything the project cannot prove, at full strength: a hostile client, synthesised evidence, list coverage, chosen thresholds, open security gaps, regulatory status |
 | [Cost and budget](cost-and-budget.md) | The vendor's rates, what caps the spend, which commands bill, what a forgotten tab costs, and how spend is reported from the ledger |
 
-`docs/brand/` holds the wordmark shown in the project README, and `docs/images/` the
-screenshots of the deployment, each taken in a window 1440 wide so all share one scale. `docs/submission/`
-holds the cover image and the slide deck as PDF, both rendered from `/cover` and `/deck`.
+`docs/brand/` holds the wordmark, `docs/readme/` the banner and badges of the project README,
+and `docs/images/` screenshots of the app, each taken in a window 1440 wide so all share one scale.
 
 ---
 

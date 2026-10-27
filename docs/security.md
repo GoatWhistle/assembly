@@ -17,6 +17,7 @@ receipt proves · **Related:** [architecture](architecture.md) ·
 ## Trust boundaries
 
 ```mermaid
+%%{init: {"theme":"base","themeVariables":{"primaryColor":"#ffffff","primaryTextColor":"#08080c","primaryBorderColor":"#5c48db","secondaryColor":"#ececf1","tertiaryColor":"#f4f4f8","lineColor":"#55555e","textColor":"#08080c","noteBkgColor":"#ececf1","noteTextColor":"#34343b","actorBkg":"#ffffff","actorBorder":"#5c48db","fontFamily":"Manrope"}}}%%
 flowchart LR
   subgraph Untrusted["Browser: client-supplied"]
     W["words[], timings, confidences<br/>posted to /turns"]
@@ -68,8 +69,7 @@ flowchart LR
   absent. It also refuses a hardcoded `Authorization` header, the tool secret outside
   `src/tools/auth.ts` and `app/api/`, a client component reading a server secret, a secret
   under a `NEXT_PUBLIC_` name, a tracked `.env` file, and a real value in `.env.example`.
-  When a build is present it greps `.next/static` for the secret names; CI builds first and
-  fails if the bundle is missing, so there the scan always runs.
+  When a build is present it greps `.next/static` for the secret names.
 - `make check-bundle`, run by hand after a build, scans the built client JavaScript for
   secret names, for the values of any secret present in the environment, and for server-only
   markers (the Redis key prefixes, the tool-secret header name, a server-side error string).
@@ -226,7 +226,7 @@ success, and a budget counted in one instance would cap nothing
 
 Development without these variables gets memory stores, because needing a Blob token to
 run `npm run dev` would be its own defect. `READBACK_ALLOW_MEMORY_STORE=1` permits memory
-stores in a production build; the CI jobs set it, a deployment must not.
+stores in a production build; local builds and tests set it, a deployment must not.
 
 Sessions are stored under three prefixes keyed off a required `origin`: `sessions/live`,
 `sessions/rehearsal`, `sessions/measurement`. An unknown origin defaults to `live`, never

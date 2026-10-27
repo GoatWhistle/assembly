@@ -16,6 +16,7 @@ audio proxy · **Related:** [security](security.md) · [verification](verificati
 ## What talks to what
 
 ```mermaid
+%%{init: {"theme":"base","themeVariables":{"primaryColor":"#ffffff","primaryTextColor":"#08080c","primaryBorderColor":"#5c48db","secondaryColor":"#ececf1","tertiaryColor":"#f4f4f8","lineColor":"#55555e","textColor":"#08080c","noteBkgColor":"#ececf1","noteTextColor":"#34343b","actorBkg":"#ffffff","actorBorder":"#5c48db","fontFamily":"Manrope"}}}%%
 flowchart LR
   subgraph Browser
     UI["Intake page<br/>src/features/intake"]
@@ -135,6 +136,7 @@ the vendor's managed model is used.
 ## One field, from speech to a written value
 
 ```mermaid
+%%{init: {"theme":"base","themeVariables":{"primaryColor":"#ffffff","primaryTextColor":"#08080c","primaryBorderColor":"#5c48db","secondaryColor":"#ececf1","tertiaryColor":"#f4f4f8","lineColor":"#55555e","textColor":"#08080c","noteBkgColor":"#ececf1","noteTextColor":"#34343b","actorBkg":"#ffffff","actorBorder":"#5c48db","fontFamily":"Manrope"}}}%%
 sequenceDiagram
   autonumber
   actor Caller
@@ -195,6 +197,7 @@ The branch table, reason codes and tool schemas are in [spec](specification.md).
 ## The gate is a leaf of the import graph
 
 ```mermaid
+%%{init: {"theme":"base","themeVariables":{"primaryColor":"#ffffff","primaryTextColor":"#08080c","primaryBorderColor":"#5c48db","secondaryColor":"#ececf1","tertiaryColor":"#f4f4f8","lineColor":"#55555e","textColor":"#08080c","noteBkgColor":"#ececf1","noteTextColor":"#34343b","actorBkg":"#ffffff","actorBorder":"#5c48db","fontFamily":"Manrope"}}}%%
 graph TD
   subgraph ALLOWED["the only packages the gate may import"]
     DOMAIN[src/domain]
@@ -244,7 +247,7 @@ rather than a copy of them.
 
 | Path | What it holds |
 |---|---|
-| `app/(pages)/` | The pages: the live intake at `/`, the judge hub at `/demo`, `/docs`, `/compare`, `/how-it-works`, `/metrics`, `/deck`, the receipt check at `/order` and `/order/[id]` |
+| `app/(pages)/` | The pages: the live intake at `/`, the replay hub at `/demo`, `/docs`, `/compare`, `/how-it-works`, `/metrics`, the receipt check at `/order` and `/order/[id]` |
 | `app/api/tokens/` | The STT and agent token routes; the agent route also creates the per-session stored agent and registers the session |
 | `app/api/tools/` | The five HTTP tool webhooks the agent calls |
 | `app/api/sessions/` | Posting turns, finalizing a session, reading back its receipt |
@@ -409,7 +412,7 @@ The tests and the synthesised replay need no variables at all. A live call needs
 | `READBACK_DAILY_BUDGET_SECONDS` | The shared daily socket budget; 7200 when unset, at most 86 400 |
 | `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN` | Budget and session registry; `KV_REST_API_URL`/`KV_REST_API_TOKEN` are accepted too |
 | `BLOB_READ_WRITE_TOKEN` | Finished sessions |
-| `READBACK_ALLOW_MEMORY_STORE` | `1` permits in-memory stores in a production build; the CI build and test jobs set it, a deployment must not |
+| `READBACK_ALLOW_MEMORY_STORE` | `1` permits in-memory stores in a production build; local builds and tests set it, a deployment must not |
 
 `ASSEMBLYAI_AGENT_ID` is used only by `make agent` and `make doctor`. Scripts run through
 `make` do not load `.env.local`: export `ASSEMBLYAI_API_KEY`, `AGENT_TOOL_SECRET` and

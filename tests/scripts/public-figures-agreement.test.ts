@@ -137,7 +137,7 @@ function unanchoredFigures(document: PublicDocument, text: string): readonly str
     .map((found) => found[0])
 }
 
-describe("every figure in README.md and the slides agrees with the command that reproduces it", () => {
+describe("every figure in README.md agrees with the command that reproduces it", () => {
   for (const anchor of ANCHORS) {
     it(
       `${anchor.document} ${anchor.locate} agrees with ${anchor.source}`,

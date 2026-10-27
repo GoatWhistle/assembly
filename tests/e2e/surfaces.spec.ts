@@ -120,15 +120,6 @@ test.describe("the evidence surfaces a judge is sent to", () => {
     await expect(page.getByLabel(/check a receipt file/i)).toBeVisible()
   })
 
-  test("the cover is exactly 1920 by 1080", async ({ page }) => {
-    await page.setViewportSize({ width: 1920, height: 1080 })
-    await page.goto("/cover")
-    const size = await page.evaluate(() => ({
-      width: document.documentElement.scrollWidth,
-      height: document.documentElement.scrollHeight,
-    }))
-    expect(size).toEqual({ width: 1920, height: 1080 })
-  })
 })
 
 test.describe("phone width", () => {

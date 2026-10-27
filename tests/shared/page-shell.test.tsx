@@ -14,7 +14,6 @@ const SHELL_SHEETS = [
   "src/shared/ui/layout/page-shell/styles.module.css",
   "src/shared/ui/navigation/docs-shell/styles.module.css",
   "src/shared/ui/primitives/site-header/styles.module.css",
-  "app/(pages)/deck/styles.module.css",
 ]
 
 const HEADER_IMPORT =

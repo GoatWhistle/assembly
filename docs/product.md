@@ -8,7 +8,7 @@
 > name can answer.
 
 **Read this if** you want the argument for the product before its engineering, or you are
-judging whether anyone would pay for it · **Related:** [for judges](for-judges.md) ·
+judging whether anyone would pay for it · **Related:**
 [sources](sources.md) · [evidence](evidence.md) · [specification](specification.md) ·
 [reference data](reference-data.md) · [limitations](limitations.md)
 
@@ -193,8 +193,7 @@ A replay that needs no key and no microphone: the same session with "hydromorpho
 "morphine" at confidence 1.0, a staged error, run through the shipped gate twice. With the
 pair rule on, a "yes" writes nothing and the name the caller says is ordered; with only the
 pair rule switched off, a plain read-back, a reflex "yes", and the wrong drug ordered. The two
-arms differ by `lasaChecked` alone. [For judges](for-judges.md) is the two-minute route,
-including a live call.
+arms differ by `lasaChecked` alone. The [README](../README.md) has the two-minute route.
 
 ## Who pays for this?
 

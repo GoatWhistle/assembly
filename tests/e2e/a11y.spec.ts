@@ -21,8 +21,6 @@ const ROUTES = [
   "/demo",
   ...DOCS_ROUTES,
   "/order/no-such-session",
-  "/cover",
-  "/deck",
 ] as const
 
 const BLOCKING = new Set(["serious", "critical"])

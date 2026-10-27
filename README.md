@@ -1,47 +1,59 @@
 <p align="center">
-  <a href="https://readback-rx.vercel.app/">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="docs/brand/wordmark-dark.svg"/>
-      <img src="docs/brand/wordmark-light.svg" alt="Readback" width="360"/>
-    </picture>
-  </a>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/banner.dark.png">
+    <img src="docs/readme/banner.light.png" alt="Readback: a voice agent that takes prescription orders and proves it did not mishear" width="880" height="200">
+  </picture>
 </p>
 
 <p align="center">
-  <b>A voice agent that takes prescription orders and proves it did not mishear.</b><br/>
   The recognizer proposes. A validator or a regulator's list decides. A refusal is a result.
 </p>
 
 <p align="center">
-  <a href="https://readback-rx.vercel.app/"><img src="https://img.shields.io/badge/Call_it_live-readback--rx.vercel.app-5c48db?style=for-the-badge&labelColor=16161d" alt="Call it live"/></a>
-  <a href="docs/README.md"><img src="https://img.shields.io/badge/Documentation-docs-e4e2f7?style=for-the-badge&labelColor=16161d" alt="Documentation"/></a>
+  <!-- readme:buttons -->
+  <a href="#run-locally"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/cta-run.dark.png"><img src="docs/readme/cta-run.light.png" alt="Run locally" width="145" height="44"></picture></a>
+  <a href="docs/specification.md"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/cta-spec.dark.png"><img src="docs/readme/cta-spec.light.png" alt="Specification" width="164" height="44"></picture></a>
+  <a href="docs/README.md"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/cta-docs.dark.png"><img src="docs/readme/cta-docs.light.png" alt="Documentation" width="181" height="44"></picture></a>
+  <!-- /readme:buttons -->
 </p>
 
 <p align="center">
-  <a href="#the-idea"><img src="https://img.shields.io/badge/The_idea-34343b?style=flat" alt="The idea"/></a>
-  <a href="#three-decisions"><img src="https://img.shields.io/badge/Three_decisions-34343b?style=flat" alt="Three decisions"/></a>
-  <a href="#how-it-works"><img src="https://img.shields.io/badge/How_it_works-34343b?style=flat" alt="How it works"/></a>
-  <a href="#see-it-in-two-minutes"><img src="https://img.shields.io/badge/See_it_in_two_minutes-34343b?style=flat" alt="See it in two minutes"/></a>
-  <a href="#what-is-measured"><img src="https://img.shields.io/badge/What_is_measured-34343b?style=flat" alt="What is measured"/></a>
-  <a href="#run-it"><img src="https://img.shields.io/badge/Run_it-34343b?style=flat" alt="Run it"/></a>
-  <a href="#built-on-assemblyai"><img src="https://img.shields.io/badge/Built_on_AssemblyAI-34343b?style=flat" alt="Built on AssemblyAI"/></a>
-  <a href="#limits-stated-first"><img src="https://img.shields.io/badge/Limits,_stated_first-8a5a00?style=flat" alt="Limits, stated first"/></a>
+  <!-- readme:status -->
+  <a href="#results"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/badge-status-1.dark.png"><img src="docs/readme/badge-status-1.light.png" alt="reflex yes on a listed pair: writes nothing" width="279" height="28"></picture></a>
+  <a href="#why-it-exists"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/badge-status-2.dark.png"><img src="docs/readme/badge-status-2.light.png" alt="listed drug: asked even at 1.00" width="221" height="28"></picture></a>
+  <br>
+  <a href="#results"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/badge-status-3.dark.png"><img src="docs/readme/badge-status-3.light.png" alt="offline figures: free to reproduce" width="233" height="28"></picture></a>
+  <a href="LICENSE"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/badge-status-4.dark.png"><img src="docs/readme/badge-status-4.light.png" alt="license: MIT" width="107" height="28"></picture></a>
+  <!-- /readme:status -->
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/recognizer-universal--3--5--pro-5c48db?style=flat-square&labelColor=16161d" alt="Recognizer universal-3-5-pro"/>
-  <img src="https://img.shields.io/badge/agent-AssemblyAI_Voice_Agent_API-5c48db?style=flat-square&labelColor=16161d" alt="AssemblyAI Voice Agent API"/>
-  <img src="https://img.shields.io/badge/framework-Next.js_15-5c48db?style=flat-square&labelColor=16161d" alt="Next.js 15"/>
-  <img src="https://img.shields.io/badge/language-TypeScript-5c48db?style=flat-square&labelColor=16161d" alt="TypeScript"/>
+  <!-- readme:stack -->
+  <picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/badge-stack-1.dark.png"><img src="docs/readme/badge-stack-1.light.png" alt="recognizer: universal-3-5-pro" width="216" height="28"></picture>
+  <picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/badge-stack-2.dark.png"><img src="docs/readme/badge-stack-2.light.png" alt="agent: AssemblyAI Voice Agent API" width="248" height="28"></picture>
+  <br>
+  <picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/badge-stack-3.dark.png"><img src="docs/readme/badge-stack-3.light.png" alt="framework: Next.js 15" width="167" height="28"></picture>
+  <picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/badge-stack-4.dark.png"><img src="docs/readme/badge-stack-4.light.png" alt="language: TypeScript" width="165" height="28"></picture>
+  <!-- /readme:stack -->
 </p>
 
 <p align="center">
-  <a href="https://readback-rx.vercel.app/"><img src="docs/images/call-page.png" alt="The call page: the promise on the left, the microphone in the centre, three example lines to say on the right" width="900"/></a>
+  <!-- readme:nav -->
+  <a href="#why-it-exists"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/badge-nav-1.dark.png"><img src="docs/readme/badge-nav-1.light.png" alt="Why it exists" width="104" height="26"></picture></a>
+  <a href="#how-it-works"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/badge-nav-2.dark.png"><img src="docs/readme/badge-nav-2.light.png" alt="How it works" width="102" height="26"></picture></a>
+  <a href="#try-it-in-two-minutes"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/badge-nav-3.dark.png"><img src="docs/readme/badge-nav-3.light.png" alt="Try it" width="56" height="26"></picture></a>
+  <a href="#results"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/badge-nav-4.dark.png"><img src="docs/readme/badge-nav-4.light.png" alt="Results" width="72" height="26"></picture></a>
+  <a href="#run-locally"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/badge-nav-5.dark.png"><img src="docs/readme/badge-nav-5.light.png" alt="Run locally" width="92" height="26"></picture></a>
+  <a href="#structure"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/badge-nav-6.dark.png"><img src="docs/readme/badge-nav-6.light.png" alt="Structure" width="85" height="26"></picture></a>
+  <a href="#limitations"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/badge-nav-7.dark.png"><img src="docs/readme/badge-nav-7.light.png" alt="Limitations" width="94" height="26"></picture></a>
+  <!-- /readme:nav -->
 </p>
 
----
+<p align="center">
+  <img src="docs/images/call-page.png" alt="The call page: the promise on the left, the microphone in the centre, three example lines to say on the right" width="880">
+</p>
 
-## The idea
+## Why it exists
 
 A recognition error in prescription intake does not look like an error. AssemblyAI's own
 example: *"A patient states an allergy to Lisinopril. The transcript reads Bisoprolol."*
@@ -66,47 +78,20 @@ and has been a Joint Commission requirement for verbal orders since 2003, so Rea
 automates a step regulation already demands and busy practice skips. Why pharmacy, why this
 procedure and who pays for it is the [product case](docs/product.md).
 
-## Three decisions
-
-<table>
-<tr>
-<td valign="top">
-
-**Confidence is not evidence**
-
-The pair check runs **before** the confidence threshold. A drug on the published list is
-asked about at any certainty, including 1.00, and only the caller saying a name confirms it.
-Naming the partner corrects the value.
-
-</td>
-<td valign="top">
-
-**One constructor writes a field**
-
-`ConfirmedValue` can be built only inside `gate.confirm()`. The order accepts nothing else,
-so "the model decided it was fine" is not a code path that exists. A machine check fails
-the build if a second way appears.
-
-</td>
-<td valign="top">
-
-**Arithmetic where it exists, voice where it does not**
-
-An NPI (Luhn over `80840`) or a DEA number (mod-10) that passes its checksum above the
-field's threshold is written at once, without a read-back. A drug name has no check digit, so
-it is proved by the catalogue and read back, and we say so.
-
-</td>
-</tr>
-</table>
-
 ## How it works
+
+Three decisions carry the design:
+
+- **Confidence is not evidence.** The pair check runs **before** the confidence threshold. A drug on the published list is asked about at any certainty, including 1.00, and only the caller saying a name confirms it. Naming the partner corrects the value.
+- **One constructor writes a field.** `ConfirmedValue` can be built only inside `gate.confirm()`. The order accepts nothing else, so "the model decided it was fine" is not a code path that exists. A machine check fails the build if a second way appears.
+- **Arithmetic where it exists, voice where it does not.** An NPI (Luhn over `80840`) or a DEA number (mod-10) that passes its checksum above the field's threshold is written at once, without a read-back. A drug name has no check digit, so it is proved by the catalogue and read back, and we say so.
 
 The browser holds both AssemblyAI sockets on short-lived tokens. The recognizer gives every
 word a millisecond span and a confidence; the agent calls our server-side tools; the gate
 decides what may be written.
 
 ```mermaid
+%%{init: {"theme":"base","themeVariables":{"primaryColor":"#ffffff","primaryTextColor":"#08080c","primaryBorderColor":"#5c48db","secondaryColor":"#ececf1","tertiaryColor":"#f4f4f8","lineColor":"#55555e","textColor":"#08080c","noteBkgColor":"#ececf1","noteTextColor":"#34343b","actorBkg":"#ffffff","actorBorder":"#5c48db","fontFamily":"Manrope"}}}%%
 flowchart LR
     S["Caller speaks"] --> R["Recognizer<br/>words · ms spans · confidence"]
     R --> P["Agent proposes a value<br/>quoting the words it came from"]
@@ -131,42 +116,38 @@ the receipt, a second channel the browser cannot forge, described in the
 [security model](docs/security.md).
 
 <p align="center">
-  <img src="docs/images/field-card.png" alt="What each arm of the replay ordered, and below it the field card for the drug name: confirmed aloud by the caller, and settled by a spoken name because the drug sits in a published look-alike pair" width="900"/>
+  <img src="docs/images/field-card.png" alt="What each arm of the replay ordered, and below it the field card for the drug name: confirmed aloud by the caller, and settled by a spoken name because the drug sits in a published look-alike pair" width="880">
 </p>
 
 <p align="center"><sub>The field card from the replay, under what each arm ordered: the words and timecodes behind
 the value, the read-back, the caller's answer and the published pair that required a spoken name.</sub></p>
 
-## See it in two minutes
+## Try it in two minutes
 
-No clone, no key and no microphone for the first four steps.
+After [running it locally](#run-locally), open <http://localhost:3000>. The first four steps need no key and no microphone.
 
 | Step | Open | What you should see |
 |---|---|---|
-| 1 | [The replay](https://readback-rx.vercel.app/demo?autoplay=1) | Hydromorphone said, morphine heard at certainty 1.00. With the pair rule on, the agent asks which of the two and the caller's "Hydromorphone." is written; with only the pair rule off, morphine is read back, a "yes" confirms it and morphine is ordered |
-| 2 | [Compare](https://readback-rx.vercel.app/compare) | Six moments side by side: said, heard, certainty, the gate's verdict, and what the same gate writes with only its threshold and validators left on |
-| 3 | [How it works](https://readback-rx.vercel.app/how-it-works#attack) | An attack console: seven attempts to push a value past the gate, each refused with the error the code raised, one of them before the value reaches the gate. Nothing is written |
-| 4 | [Metrics](https://readback-rx.vercel.app/metrics) | Every figure with its command and set size, the pair rule's cost beside its catches, and a dash where nothing was measured |
-| 5 | [Call it live](https://readback-rx.vercel.app/) | Say "Hydromorphone, two milligrams". The agent names the drug and every drug the list pairs with it, and waits for a name |
-
-What each step proves, why each attack fails and where every judging criterion is answered
-are set out in the [guide for judges](docs/for-judges.md).
+| 1 | [The replay](http://localhost:3000/demo?autoplay=1) | Hydromorphone said, morphine heard at certainty 1.00. With the pair rule on, the agent asks which of the two and the caller's "Hydromorphone." is written; with only the pair rule off, morphine is read back, a "yes" confirms it and morphine is ordered |
+| 2 | [Compare](http://localhost:3000/compare) | Six moments side by side: said, heard, certainty, the gate's verdict, and what the same gate writes with only its threshold and validators left on |
+| 3 | [How it works](http://localhost:3000/how-it-works#attack) | An attack console: seven attempts to push a value past the gate, each refused with the error the code raised, one of them before the value reaches the gate. Nothing is written |
+| 4 | [Metrics](http://localhost:3000/metrics) | Every figure with its command and set size, the pair rule's cost beside its catches, and a dash where nothing was measured |
+| 5 | [Call it live](http://localhost:3000/), with a key and a public origin | Say "Hydromorphone, two milligrams". The agent names the drug and every drug the list pairs with it, and waits for a name |
 
 <p align="center">
-  <a href="https://readback-rx.vercel.app/demo?autoplay=1"><img src="docs/images/replay-two-arms.png" alt="The replay finished: with the pair rule on, hydromorphone is written after the caller names it; with only the pair rule off, a yes confirms morphine and morphine is ordered" width="900"/></a>
+  <img src="docs/images/replay-two-arms.png" alt="The replay finished: with the pair rule on, hydromorphone is written after the caller names it; with only the pair rule off, a yes confirms morphine and morphine is ordered" width="880">
 </p>
 
-<p align="center"><sub>Step 1, the replay. The same synthesised session through the shipped gate twice, differing
-by one flag.</sub></p>
+<p align="center"><sub>Step 1, the replay. The same synthesised session through the shipped gate twice, differing by one flag.</sub></p>
 
 <p align="center">
-  <img src="docs/images/receipt.png" alt="An order receipt rechecked in the browser: VALID, with the digest, DEA, NPI and catalogue checks passed" width="900"/>
+  <img src="docs/images/receipt.png" alt="An order receipt rechecked in the browser: VALID, with the digest, DEA, NPI and catalogue checks passed" width="880">
 </p>
 
 <p align="center"><sub>The receipt of a production call placed by the synthesised-caller smoke harness, rechecked in
 the browser: the sha256, the DEA and NPI check digits and the catalogue.</sub></p>
 
-## What is measured
+## Results
 
 Every figure below is printed by a command in this repository, offline and free. The
 [measurement report](eval/REPORT.md) carries each one with its command and set size, and
@@ -184,7 +165,7 @@ to assumed.
 The 20 curated pairs, each checked by hand against its row of the list, drive the demo and
 the evaluation; the product rule reads the whole list.
 
-## Run it
+## Run locally
 
 ```bash
 npm ci
@@ -202,7 +183,17 @@ is listed in [how to run it locally](docs/architecture.md#how-to-run-it-locally)
 runs every check; what each one refuses, and which few commands spend credit, is in
 [how it is verified](docs/verification.md).
 
-## Built on AssemblyAI
+## Structure
+
+| Document | What it covers |
+|---|---|
+| [Architecture](docs/architecture.md) | What talks to what, one field from speech to a written value, running locally |
+| [Specification](docs/specification.md) | The data model, field policy, the gate's branch order, every tool contract |
+| [Security](docs/security.md) | Trust boundaries, tool authentication, the vendor witness |
+| [Verification](docs/verification.md) | Every check, what it refuses, which commands spend credit |
+| [Documentation](docs/README.md) | Every page |
+
+### Built on AssemblyAI
 
 | Capability | Why the product depends on it |
 |---|---|
@@ -212,7 +203,7 @@ runs every check; what each one refuses, and which few commands spend credit, is
 | `keyterms_prompt` | Biases the recognizer toward clinic, prescriber and unit words, and is forbidden, by a check, from ever containing a drug name the pair rule tests |
 | Entity-aware turn detection | The vendor documents that the agent waits for a whole entity before ending a turn; we never send the two settings that switch it off, because an NPI dictated in digit groups is the case it protects |
 
-## Limits, stated first
+## Limitations
 
 - **The gate proves provenance, not truth.** Provenance is computed in the browser, so a
   hostile client can report words nobody said. The vendor's own transcript, fetched by the
@@ -233,4 +224,8 @@ remains open, is set out in full in [the limitations](docs/limitations.md).
 > **A technology demonstration, not a medical device.** Synthetic data only: no real
 > patients, no real prescriptions. In an emergency call 911, or 988 for a mental health crisis.
 
-<p align="center"><sub>Built for the <a href="https://lablab.ai/ai-hackathons/assemblyai-voice-agent-hackathon">AssemblyAI Voice Agent Hackathon</a>.</sub></p>
+<p align="center">
+  <picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/mark.dark.png"><img src="docs/readme/mark.light.png" alt="" width="32" height="32"></picture>
+  <br>
+  <sub>Team GoatWhistle, AssemblyAI Voice Agent Hackathon on lablab.ai, 2026. Licensed under <a href="LICENSE">MIT</a>.</sub>
+</p>

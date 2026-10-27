@@ -155,7 +155,6 @@ On production `clean-order`, `lasa-named` and `commit-hold` committed their orde
 `yeah-no`, `barge-in` and `npi-groups` completed: each scenario has one passing run. The
 scenario table, with every billed and refused attempt, is in
 [eval/REPORT.md](../eval/REPORT.md#live-runs-on-production).
-`.github/workflows/live-smoke.yml` runs the same calls against a deployed URL on demand.
 
 ### What is deliberately not measured
 

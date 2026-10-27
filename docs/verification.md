@@ -3,8 +3,7 @@
 > Every rule this project states is enforced by a check that fails the build. Each ratchet
 > either has a positive control that plants a violation and requires the check to fail, or is
 > exempt by name for a stated reason, and every gate branch is broken in turn until its own
-> test fails by name. `make verify` runs the whole set locally; three CI workflows run the same
-> steps on every push to `main` and every pull request. Paid AssemblyAI calls are confined to
+> test fails by name. `make verify` runs the whole set locally. Paid AssemblyAI calls are confined to
 > a few named targets that refuse to run without a key and without an explicit confirmation.
 
 **Read this if** you are changing code and need to know what must pass, or you want to check
@@ -20,27 +19,10 @@ a published number yourself · **Related:** [architecture](architecture.md) ·
 ```mermaid
 flowchart TB
   V["make verify<br/>VERIFY_STEPS in the Makefile"]
-
-  subgraph CQ["code quality workflow"]
-    CQ1["correctness job<br/>lint, typecheck, file-length, package-size,<br/>package-subject, import-cycles, ascii"]
-    CQ2["interface job<br/>tokens, token-refs, colocation, css-dead,<br/>contrast, touch-targets, confidence-language"]
-  end
-
-  subgraph TS["test suite workflow"]
-    TS1["suite job<br/>no credential present, make test serialized,<br/>no planted file left behind"]
-    TS2["evidence job<br/>smoke, latency-budget, keyterms-purity,<br/>heldout-seal, make honest"]
-  end
-
-  subgraph SI["safety invariants workflow"]
-    SI1["the-gate job<br/>gate-invariant, gate-mutation,<br/>gate file byte-identical, no lock left"]
-    SI2["no-secret-leaks job<br/>next build, bundle present,<br/>secrets, server-only"]
-  end
-
-  LS["live smoke workflow<br/>manual, url + confirm BILL<br/>six scripted calls, paid"]
-
-  V -. same steps .-> CQ
-  V -. same steps .-> TS
-  V -. same steps .-> SI
+  V --> Q["code quality<br/>lint, typecheck, file-length, package-size,<br/>package-subject, import-cycles, ascii,<br/>tokens, token-refs, colocation, css-dead,<br/>contrast, touch-targets, confidence-language"]
+  V --> T["tests and evidence<br/>make test, smoke, latency-budget,<br/>keyterms-purity, heldout-seal"]
+  V --> G["safety invariants<br/>gate-invariant, gate-mutation,<br/>secrets, server-only"]
+  L["make live-smoke<br/>manual, confirmed, paid<br/>six scripted calls"]
 ```
 
 `VERIFY_STEPS` in the `Makefile` is the list of steps and the only one; no count is quoted
@@ -84,7 +66,7 @@ sources, so thorough coverage is not pushed toward fewer tests. The package limi
 because the file limit alone would let a long file be sliced into many small ones inside the
 same directory.
 
-The ban on comments covers code, `Makefile`, configuration, scripts and CI. Explanations live
+The ban on comments covers code, `Makefile`, configuration and scripts. Explanations live
 in [docs/](README.md).
 
 ## How the guarantee is enforced
@@ -170,45 +152,10 @@ must fail it, and the whole tree must leave it quiet. Why each of these rules ex
 
 `make secrets` searches `src` and `app` for `ASSEMBLYAI_API_KEY` and allows it only under
 `app/api/`, and fails if no file there names it at all. When `.next/static` exists it greps
-the built client bundle for the secret names. The CI job builds first and fails if
-`.next/static` is missing, so the bundle scan cannot be skipped. `make check-bundle`, run by
-hand after a build and not part of `verify` or CI, also searches the bundle for secret values
+the built client bundle for the secret names. Build first so the bundle scan has something to read. `make check-bundle`, run by
+hand after a build and not part of `verify`, also searches the bundle for secret values
 and server-only markers. See [security](security.md#the-key-never-leaves-the-server) for the
 rest of what both refuse.
-
-## What CI runs on every push
-
-Four workflows in [`.github/workflows/`](../.github/workflows/). The first three run on every
-push to `main`, every pull request and on demand; together they run every step of
-`VERIFY_STEPS`, plus a production build and `make honest`.
-
-| Workflow | Job | What fails it | Timeout |
-|---|---|---|---|
-| **code quality** | correctness | lint, types, file length, package size, package subject, import cycles, the English-only rule | 10 min |
-| | interface | design tokens, token references, colocation, dead CSS, contrast, touch targets, confidence wording | 10 min |
-| **test suite** | suite | a credential present in the job, the suite itself, a positive control leaving a planted file behind | 20 min |
-| | evidence | the fixture pipeline, the latency budget, keyterm purity, the held-out seal, every figure `make honest` reproduces | 15 min |
-| **safety invariants** | the-gate | the gate invariant, all twelve mutations, the gate file not byte-identical afterwards, a mutation lock left behind | 25 min |
-| | no-secret-leaks | the build, a missing client bundle, a secret in the sources or the bundle, a server-only value imported by the client | 15 min |
-| **live smoke** | smoke | manual only; refuses unless the `confirm` input is `BILL`; six scripted calls against the given URL | 45 min |
-
-After the first step of a job, most steps carry `if: ${{ !cancelled() }}` and the run
-assertions carry `if: always()`, so one failure does not hide the state of the checks behind
-it. Two steps are deliberately gated on the one before: in the suite job `make test` runs
-only once no credential is found, and in no-secret-leaks the bundle-presence step and
-`make secrets` run only after a successful build, because without a bundle they would prove
-nothing. Jobs in one
-workflow run in parallel. Each gate mutation reruns `tests/gate`, not the whole suite, which
-keeps the safety job inside its time limit.
-
-Two jobs assert something about the run rather than the code: the gate file must be
-byte-identical after mutation testing with no lock left behind, and no positive control may
-leave a planted file behind.
-
-The live smoke workflow installs only Chromium, while `make live-smoke` runs both Playwright
-projects, so the `firefox-fake-caller` project cannot run there as the workflow stands. The
-recorded live runs used that project locally (see
-[the live smoke harness](#what-does-the-live-smoke-harness-drive)).
 
 ## Checking our numbers without a key
 
@@ -274,8 +221,7 @@ In the other direction, the test suite never reads a real key:
 [`tests/setup.ts`](../tests/setup.ts) deletes `ASSEMBLYAI_API_KEY` and the other credentials
 before any test module loads and replaces `fetch` and `WebSocket` with refusing stubs; a test
 that needs a variable sets a placeholder with `vi.stubEnv`. No test can reach AssemblyAI
-through either even if the environment holds a valid key, and the CI suite job fails if a key
-is present at all.
+through either even if the environment holds a valid key.
 
 ## What does the live smoke harness drive?
 

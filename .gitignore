@@ -6,12 +6,11 @@ node_modules/
 .next/
 out/
 *.tsbuildinfo
-.vercel
+next-env.d.ts
 
 coverage/
 test-results/
 playwright-report/
-.playwright-mcp/
 .gate-mutation-running
 
 data/*.csv
@@ -20,7 +19,4 @@ eval/*/audio/
 
 screenshots/
 artefacts/
-.impeccable/
-CLAUDE.md
-.claude/
 *.partial.json

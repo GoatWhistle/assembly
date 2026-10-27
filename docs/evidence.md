@@ -103,6 +103,7 @@ real `decide()` over the 80 utterances of `eval/control` and `eval/native16`, ea
 the **first** branch `decide()` takes, in the gate's own order.
 
 ```mermaid
+%%{init: {"theme":"base","themeVariables":{"primaryColor":"#ffffff","primaryTextColor":"#08080c","primaryBorderColor":"#5c48db","secondaryColor":"#ececf1","tertiaryColor":"#f4f4f8","lineColor":"#55555e","textColor":"#08080c","noteBkgColor":"#ececf1","noteTextColor":"#34343b","actorBkg":"#ffffff","actorBorder":"#5c48db","fontFamily":"Manrope"}}}%%
 flowchart TD
   V["80 recorded drug names: 21 misheard, 59 correct"] --> C{"In the catalogue?"}
   C -->|"no: 21 errors, 0 correct"| R1["Re-ask: catalogue miss"]

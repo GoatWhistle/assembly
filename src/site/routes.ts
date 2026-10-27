@@ -20,8 +20,6 @@ export const INDEXED_ROUTES: readonly IndexedRoute[] = Object.freeze([
 export const UNINDEXED_ROUTES: Readonly<Record<string, string>> = Object.freeze({
   "/live": "a permanent redirect to the call page",
   "/start": "a permanent redirect to the replay",
-  "/cover": "the submission cover image, not a page to land on",
-  "/deck": "the submission slides, printed rather than read",
   "/order": "a local file check that only works with a receipt in hand",
   "/order/[id]": "one session's receipt, private to whoever holds the link",
   "/qa-states": "a visual QA harness for the call screen",

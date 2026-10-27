@@ -15,7 +15,7 @@ function sources(dir: string): string[] {
 
 function literalReads(): { file: string; path: string }[] {
   const reads: { file: string; path: string }[] = []
-  for (const file of [...sources("tests"), ...sources("scripts")]) {
+  for (const file of [...sources("tests"), ...sources("tools/scripts")]) {
     const text = readFileSync(file, "utf8")
     for (const match of text.matchAll(/readFileSync\(\s*"([^"]+\.[a-z]+)"/g)) {
       if (match[1] !== undefined) {

@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync } from "node:fs"
 import { describe, expect, it } from "vitest"
 
-const SCRIPT_DIR = "scripts"
+const SCRIPT_DIR = "tools/scripts"
 
 const ENTRY_GUARD = /if\s*\(\s*process\.argv\[1\]\?\.includes\(/
 

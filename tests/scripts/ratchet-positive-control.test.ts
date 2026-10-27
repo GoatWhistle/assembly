@@ -15,7 +15,7 @@ import { CONTROLS, type Control } from "./ratchet-controls"
 
 const created: string[] = []
 
-const PLANT_ROOTS: readonly string[] = ["src/features", "src", "app", "tests", "scripts"]
+const PLANT_ROOTS: readonly string[] = ["src/features", "src", "app", "tests", "tools/scripts"]
 
 function removeEmptyPlantDirectories(file: string): void {
   let directory = dirname(file)

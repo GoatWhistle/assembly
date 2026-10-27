@@ -3,7 +3,7 @@ import { join } from "node:path"
 import { describe, expect, it } from "vitest"
 import { RATE_USD_PER_HOUR } from "@/domain"
 
-const SCRIPT_DIR = "scripts"
+const SCRIPT_DIR = "tools/scripts"
 
 const SELF_PATH = "tests/scripts/no-self-confirming-constant.test.ts"
 
